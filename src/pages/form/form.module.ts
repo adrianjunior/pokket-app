@@ -11,6 +11,6 @@ import { FormPage } from './form';
   ],
   exports: [
     FormPage
-  ]
+  ] 
 })
 export class FormPageModule {}
