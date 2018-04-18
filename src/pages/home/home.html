@@ -1,14 +1,18 @@
 <ion-header>
-  <ion-navbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Ionic Blank
+      Pokket
     </ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <p>Você ainda não possui um diagnóstico.</p>
+    </ion-row>
+    <ion-row justify-content-center>
+      <button ion-button (click)="goToFormPage()">Fazer diagnóstico</button>
+    </ion-row>
+  </ion-grid>
 </ion-content>
