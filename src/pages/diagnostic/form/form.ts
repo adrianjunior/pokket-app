@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { Category } from '../../../assets/data/category.interface';
 
@@ -14,61 +14,57 @@ export class FormPage implements OnInit {
   form: FormGroup;
   category: Category;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, private formBuilder: FormBuilder) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) { }
 
   ngOnInit() {
     this.category = this.navParams.data;
-    /*switch (this.category.name) {
+  }
+  
+  initForm() {
+    switch (this.category.name) {
       case 'Receitas': {
-        this.form = this.formBuilder.group({
-          email: [''],
-          password: ['']
+        this.form =  new FormGroup({
+          
         })
         break;
       }
       case 'Desembolso Fixo Obrigatório': {
-        this.form = this.formBuilder.group({
-          email: [''],
-          password: ['']
+        this.form =  new FormGroup({
+          
         })
         break;
       }
       case 'Desembolso Fixo Não-Obrigatório': {
-        this.form = this.formBuilder.group({
-          email: [''],
-          password: ['']
+        this.form =  new FormGroup({
+          
         })
         break;
       }
       case 'Desembolso Variável Obrigatório': {
-        this.form = this.formBuilder.group({
-          email: [''],
-          password: ['']
+        this.form =  new FormGroup({
+          
         })
         break;
       }
       case 'Desembolso Variável Não-Obrigatório': {
-        this.form = this.formBuilder.group({
-          email: [''],
-          password: ['']
+        this.form =  new FormGroup({
+          
         })
         break;
       }
       case 'Ativos Financeiros': {
-        this.form = this.formBuilder.group({
-          email: [''],
-          password: ['']
+        this.form =  new FormGroup({
+          
         })
         break;
       }
       case 'Ativos Não-Financeiros': {
-        this.form = this.formBuilder.group({
-          email: [''],
-          password: ['']
+        this.form =  new FormGroup({
+          
         })
         break;
       }
-    }*/
+    }
   }
 
   onGoBack() {
