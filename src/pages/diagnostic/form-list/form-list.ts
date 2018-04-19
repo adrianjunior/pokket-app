@@ -1,25 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
-/**
- * Generated class for the FormListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Category } from '../../../assets/data/category.interface';
+import categories from '../../../assets/data/categories';
 
 @IonicPage()
 @Component({
   selector: 'page-form-list',
   templateUrl: 'form-list.html',
 })
-export class FormListPage {
+export class FormListPage implements OnInit {
+
+  formPage = `FormPage`;
+  categories: Category[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FormListPage');
+  }
+
+  ngOnInit() {
+    this.categories = categories;
   }
 
   onGoBack() {

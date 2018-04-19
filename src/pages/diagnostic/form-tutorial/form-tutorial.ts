@@ -8,15 +8,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FormTutorialPage {
 
+  formListPage = `FormListPage`; 
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FormTutorialPage');
-  }
-
-  goToFormListPage(){
-    this.navCtrl.push(`FormListPage`);
   }
 
 }

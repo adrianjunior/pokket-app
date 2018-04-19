@@ -10,7 +10,7 @@
       <p>Você ainda não possui um diagnóstico.</p>
     </ion-row>
     <ion-row justify-content-center>
-      <button ion-button (click)="goToFormTutorialPage()">Fazer diagnóstico</button>
+      <button ion-button [navPush]="formTutorialPage">Fazer diagnóstico</button>
     </ion-row>
   </ion-grid>
 </ion-content>

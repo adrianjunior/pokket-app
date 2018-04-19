@@ -11,88 +11,20 @@
 
 <ion-content>
 
-  <ion-card>
-    <img src="../../assets/imgs/renda.png" />
-    <ion-card-content>
-      <ion-card-title>
-        Receitas
-      </ion-card-title>
-      <p>
-        Um resumo de tudo que você recebe no mês.
-      </p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <img src="../../assets/imgs/dfo.png" />
-    <ion-card-content>
-      <ion-card-title>
-        Desembolso Fixo Obrigatório
-      </ion-card-title>
-      <p>
-        Contas que possuem valor fixo e devem ser pagas todo mês.
-      </p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <img src="../../assets/imgs/dvo.png" />
-    <ion-card-content>
-      <ion-card-title>
-        Desembolso Variável Obrigatório
-      </ion-card-title>
-      <p>
-        Contas que não possuem valor fixo, mas que tem que ser pagas todo mês.
-      </p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <img src="../../assets/imgs/dfno.png" />
-    <ion-card-content>
-      <ion-card-title>
-        Desembolso Fixo Não-Obrigatório
-      </ion-card-title>
-      <p>
-        Contas que possuem valor fixo, mas não acontecem todo mês.
-      </p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <img src="../../assets/imgs/dvno.png" />
-    <ion-card-content>
-      <ion-card-title>
-        Desembolso Variável Não-Obrigatório
-      </ion-card-title>
-      <p>
-        Contas que não possuem valor fixo e também não acontecem todo mês.
-      </p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <img src="../../assets/imgs/af.png" />
-    <ion-card-content>
-      <ion-card-title>
-        Ativos Financeiros
-      </ion-card-title>
-      <p>
-        Contas que não possuem valor fixo, mas que tem que ser pagas todo mês.
-      </p>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <img src="../../assets/imgs/anf.png" />
-    <ion-card-content>
-      <ion-card-title>
-        Ativos Não-Financeiros
-      </ion-card-title>
-      <p>
-        Contas que não possuem valor fixo, mas que tem que ser pagas todo mês.
-      </p>
-    </ion-card-content>
-  </ion-card>
+  <ion-list>
+    <ion-item *ngFor="let category of categories">
+      <ion-card [navPush]="formPage" [navParams]="category">
+        <img src="../../../{{category.image}}"/>
+        <ion-card-content>
+          <ion-card-title style="white-space: normal;">
+            {{category.name}}
+          </ion-card-title>
+          <p style="white-space: normal;">
+            {{category.description}}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
