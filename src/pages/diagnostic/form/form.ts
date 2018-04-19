@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { Category } from '../../../assets/data/category.interface';
+import { Income } from '../../../assets/data/income.interface';
 
 @IonicPage()
 @Component({
@@ -13,6 +14,9 @@ export class FormPage implements OnInit {
 
   form: FormGroup;
   category: Category;
+  numberOfFields = [
+    ""
+  ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) { }
 
@@ -62,6 +66,39 @@ export class FormPage implements OnInit {
         this.form =  new FormGroup({
           
         })
+        break;
+      }
+    }
+  }
+
+  addField() {
+    switch (this.category.name) {
+      case 'Receitas': {
+        this.numberOfFields.push("");
+        break;
+      }
+      case 'Desembolso Fixo Obrigatório': {
+        
+        break;
+      }
+      case 'Desembolso Fixo Não-Obrigatório': {
+        
+        break;
+      }
+      case 'Desembolso Variável Obrigatório': {
+        
+        break;
+      }
+      case 'Desembolso Variável Não-Obrigatório': {
+        
+        break;
+      }
+      case 'Ativos Financeiros': {
+        
+        break;
+      }
+      case 'Ativos Não-Financeiros': {
+        
         break;
       }
     }

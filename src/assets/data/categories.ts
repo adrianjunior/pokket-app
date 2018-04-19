@@ -26,12 +26,12 @@ export default [
     },
     {
         name: 'Ativos Financeiros',
-        description: 'Dummy.',
+        description: 'Bens e investimentos que trazem retorno financeiro periodicamente.',
         image: 'assets/imgs/af.png'
     },
     {
         name: 'Ativos Não-Financeiros',
-        description: 'Dummy.',
+        description: 'Bens e investimentos que não trazem retorno financeiro periodicamente.',
         image: 'assets/imgs/anf.png'
     }
 ]

@@ -1,20 +1,44 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons left>
-      <button ion-button icon-only (click)="onGoBack()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>{{category.name}}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons left>
+            <button ion-button icon-only (click)="onGoBack()">
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons right>
+            <button ion-button icon-only (click)="addField()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>{{category.name}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-    <form *ngIf="category.name === 'Receitas'" style="border: solid 1px red">
+    <form class="form" *ngIf="category.name === 'Receitas'">
+        <ion-list *ngFor="let field of numberOfFields">
+            <ion-list>
+                <ion-item>
+                    <ion-label floating>Nome</ion-label>
+                    <ion-input type="text"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label floating>Valor</ion-label>
+                    <ion-input type="number"></ion-input>
+                </ion-item>
+            </ion-list>
+        </ion-list>
+
+        <button type="submit" ion-button block color="primary">
+            Concluir
+        </button>
+    </form>
+
+    <form class="form" *ngIf="category.name === 'Desembolso Fixo Obrigatório'">
         <ion-list>
             <ion-item>
-                
+
             </ion-item>
         </ion-list>
         <button ion-button color="primary">
@@ -22,10 +46,10 @@
         </button>
     </form>
 
-    <form *ngIf="category.name === 'Desembolso Fixo Obrigatório'">
+    <form class="form" *ngIf="category.name === 'Desembolso Fixo Não-Obrigatório'">
         <ion-list>
             <ion-item>
-                
+
             </ion-item>
         </ion-list>
         <button ion-button color="primary">
@@ -33,10 +57,10 @@
         </button>
     </form>
 
-    <form *ngIf="category.name === 'Desembolso Fixo Não-Obrigatório'">
+    <form class="form" *ngIf="category.name === 'Desembolso Variável Obrigatório'">
         <ion-list>
             <ion-item>
-                
+
             </ion-item>
         </ion-list>
         <button ion-button color="primary">
@@ -44,10 +68,10 @@
         </button>
     </form>
 
-    <form *ngIf="category.name === 'Desembolso Variável Obrigatório'">
+    <form class="form" *ngIf="category.name === 'Desembolso Variável Não-Obrigatório'">
         <ion-list>
             <ion-item>
-                
+
             </ion-item>
         </ion-list>
         <button ion-button color="primary">
@@ -55,10 +79,10 @@
         </button>
     </form>
 
-    <form *ngIf="category.name === 'Desembolso Variável Não-Obrigatório'">
+    <form class="form" *ngIf="category.name === 'Ativos Financeiros'">
         <ion-list>
             <ion-item>
-                
+
             </ion-item>
         </ion-list>
         <button ion-button color="primary">
@@ -66,21 +90,10 @@
         </button>
     </form>
 
-    <form *ngIf="category.name === 'Ativos Financeiros'">
+    <form class="form" *ngIf="category.name === 'Ativos Não-Financeiros'">
         <ion-list>
             <ion-item>
-                
-            </ion-item>
-        </ion-list>
-        <button ion-button color="primary">
-            Concluir
-        </button>
-    </form>
 
-    <form *ngIf="category.name === 'Ativos Não-Financeiros'">
-        <ion-list>
-            <ion-item>
-                
             </ion-item>
         </ion-list>
         <button ion-button color="primary">
