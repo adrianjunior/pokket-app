@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="onGoBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>{{category.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <form *ngIf="category.name === 'Receitas'">
+        <ion-list>
+            <ion-item>
+                
+            </ion-item>
+        </ion-list>
+        <button ion-button color="primary">
+            Concluir
+        </button>
+    </form>
+
+    <form *ngIf="category.name === 'Desembolso Fixo Obrigatório'">
+        <ion-list>
+            <ion-item>
+                
+            </ion-item>
+        </ion-list>
+        <button ion-button color="primary">
+            Concluir
+        </button>
+    </form>
+
+    <form *ngIf="category.name === 'Desembolso Fixo Não-Obrigatório'">
+        <ion-list>
+            <ion-item>
+                
+            </ion-item>
+        </ion-list>
+        <button ion-button color="primary">
+            Concluir
+        </button>
+    </form>
+
+    <form *ngIf="category.name === 'Desembolso Variável Obrigatório'">
+        <ion-list>
+            <ion-item>
+                
+            </ion-item>
+        </ion-list>
+        <button ion-button color="primary">
+            Concluir
+        </button>
+    </form>
+
+    <form *ngIf="category.name === 'Desembolso Variável Não-Obrigatório'">
+        <ion-list>
+            <ion-item>
+                
+            </ion-item>
+        </ion-list>
+        <button ion-button color="primary">
+            Concluir
+        </button>
+    </form>
+
+    <form *ngIf="category.name === 'Ativos Financeiros'">
+        <ion-list>
+            <ion-item>
+                
+            </ion-item>
+        </ion-list>
+        <button ion-button color="primary">
+            Concluir
+        </button>
+    </form>
+
+    <form *ngIf="category.name === 'Ativos Não-Financeiros'">
+        <ion-list>
+            <ion-item>
+                
+            </ion-item>
+        </ion-list>
+        <button ion-button color="primary">
+            Concluir
+        </button>
+    </form>
+</ion-content>

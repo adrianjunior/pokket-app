@@ -26,17 +26,7 @@ export class FormListPage implements OnInit {
   }
 
   onGoBack() {
-    let alert = this.alertCtrl.create({
-      title: 'Tem certeza?',
-      subTitle: 'Caso volte agora, todo seu progresso no formulário será perdido.',
-      buttons: [{
-        text: 'Sim, tenho certeza!',
-        handler: () => {
-          this.navCtrl.popToRoot();
-        }
-      }, 'Não, quero ficar.']
-    });
-    alert.present();
+    this.navCtrl.popToRoot();
   }
 
 }
