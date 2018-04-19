@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController } from 'ionic-angular';
 import { ResultPage } from '../result/result';
-import { FormPage } from '../form/form';
-import { FormTutorialPage } from '../form-tutorial/form-tutorial';
+import { FormPage } from '../diagnostic/form/form';
+import { FormTutorialPage } from '../diagnostic/form-tutorial/form-tutorial';
 
 @Component({
   selector: 'page-home',

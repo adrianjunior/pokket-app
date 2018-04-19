@@ -15,8 +15,8 @@ export class FormTutorialPage {
     console.log('ionViewDidLoad FormTutorialPage');
   }
 
-  goToFormPage(){
-    this.navCtrl.push(`FormPage`);
+  goToFormListPage(){
+    this.navCtrl.push(`FormListPage`);
   }
 
 }
