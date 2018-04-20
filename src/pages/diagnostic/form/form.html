@@ -5,20 +5,15 @@
                 <ion-icon name="arrow-back"></ion-icon>
             </button>
         </ion-buttons>
-        <ion-buttons right>
-            <button ion-button icon-only (click)="addField()">
-                <ion-icon name="add"></ion-icon>
-            </button>
-        </ion-buttons>
         <ion-title>{{category.name}}</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-    <form class="form" *ngIf="category.name === 'Receitas'">
-        <ion-list *ngFor="let field of numberOfFields">
-            <ion-list>
+    <form [formGroup]="form" class="form" *ngIf="category.name === 'Receitas'">
+        <div formArrayName="income">
+            <ion-list [formGroupName]="i" *ngFor="let tech of form.controls.income.controls; let i = index">
                 <ion-item>
                     <ion-label floating>Nome</ion-label>
                     <ion-input type="text"></ion-input>
@@ -27,8 +22,16 @@
                     <ion-label floating>Valor</ion-label>
                     <ion-input type="number"></ion-input>
                 </ion-item>
+                <span float-right ion-button icon-left clear *ngIf="form.controls.income.length > 1" (click)="removeField(i)">
+                    <ion-icon name="close"></ion-icon>
+                    Remover Receita
+                </span>
             </ion-list>
-        </ion-list>
+            <span ion-button float-left icon-left clear (click)="addField()">
+                <ion-icon name="add"></ion-icon>
+                Adicionar Receita
+            </span>
+        </div>
 
         <button type="submit" ion-button block color="primary">
             Concluir
