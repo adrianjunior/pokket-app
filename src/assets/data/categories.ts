@@ -33,5 +33,10 @@ export default [
         name: 'Ativos Não-Financeiros',
         description: 'Bens e investimentos que não trazem retorno financeiro periodicamente.',
         image: 'assets/imgs/anf.png'
+    },
+    {
+        name: 'Dívidas',
+        description: 'Suas dívidas.',
+        image: 'assets/imgs/dividas.png'
     }
 ]

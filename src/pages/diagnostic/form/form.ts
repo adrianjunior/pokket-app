@@ -68,6 +68,9 @@ export class FormPage implements OnInit {
         })
         break;
       }
+      case 'Dívidas': {
+        
+      }
     }
   }
 
@@ -100,6 +103,9 @@ export class FormPage implements OnInit {
       case 'Ativos Não-Financeiros': {
         
         break;
+      }
+      case 'Dívidas': {
+
       }
     }
   }
