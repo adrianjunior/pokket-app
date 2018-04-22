@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Category } from '../../../assets/data/category.interface';
 import { Income } from '../../../assets/data/income.interface';
+import { debugOutputAstAsTypeScript } from '@angular/compiler';
 
 @IonicPage()
 @Component({
@@ -14,149 +15,101 @@ export class FormPage implements OnInit {
 
   form: FormGroup;
   category: Category;
-  numberOfFields = [
-    ""
-  ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public alertCtrl: AlertController, public formBuilder: FormBuilder) { }
+    public alertCtrl: AlertController, public formBuilder: FormBuilder) {}
 
   ngOnInit() {
     this.category = this.navParams.data;
     this.initForm();
   }
 
-  initIncomeFields(): FormGroup {
-    return this.formBuilder.group({
-      name: ['', Validators.required],
-      value: ['', Validators.required]
+  initForm() {
+    this.form = this.formBuilder.group({
+      formArray: this.formBuilder.array([
+        this.initFields()
+      ])
     });
   }
 
-  initForm() {
+  initFields(): FormGroup {
     switch (this.category.name) {
       case 'Receitas': {
-        this.form = this.formBuilder.group({
-          income: this.formBuilder.array([
-            this.initIncomeFields()
-          ])
+        return this.formBuilder.group({
+          name: ['', Validators.required],
+          value: ['', Validators.required]
         });
-        break;
       }
       case 'Desembolso Fixo Obrigatório': {
-        this.form = new FormGroup({
-
-        })
-        break;
+        return this.formBuilder.group({
+          name: ['', Validators.required],
+          value: ['', Validators.required]
+        });
       }
       case 'Desembolso Fixo Não-Obrigatório': {
-        this.form = new FormGroup({
-
-        })
-        break;
+        return this.formBuilder.group({
+          name: ['', Validators.required],
+          value: ['', Validators.required]
+        });
       }
       case 'Desembolso Variável Obrigatório': {
-        this.form = new FormGroup({
-
-        })
-        break;
+        return this.formBuilder.group({
+          name: ['', Validators.required],
+          value: ['', Validators.required]
+        });
       }
       case 'Desembolso Variável Não-Obrigatório': {
-        this.form = new FormGroup({
-
-        })
-        break;
+        return this.formBuilder.group({
+          name: ['', Validators.required],
+          value: ['', Validators.required]
+        });
       }
       case 'Ativos Financeiros': {
-        this.form = new FormGroup({
-
-        })
-        break;
+        return this.formBuilder.group({
+          product: ['', Validators.required],
+          type: ['', Validators.required],
+          institution: ['', Validators.required],
+          invDate: ['', Validators.required],
+          initialValue: ['', Validators.required],
+          currentValue: ['', Validators.required]
+        });
       }
       case 'Ativos Não-Financeiros': {
-        this.form = new FormGroup({
-
-        })
-        break;
+        return this.formBuilder.group({
+          description: ['', Validators.required],
+          type: ['', Validators.required],
+          buyDate: ['', Validators.required],
+          provider: ['', Validators.required],
+          buyValue: ['', Validators.required],
+          currentValue: ['', Validators.required]
+        });
       }
       case 'Dívidas': {
-
+        return this.formBuilder.group({
+          description: ['', Validators.required],
+          type: ['', Validators.required],
+          creditor: ['', Validators.required],
+          debtDate: ['', Validators.required],
+          interest: ['', Validators.required],
+          mainValue: ['', Validators.required],
+          remainingValue: ['', Validators.required]
+        });
       }
     }
   }
 
   addField(): void {
-    switch (this.category.name) {
-      case 'Receitas': {
-        const control = <FormArray>this.form.controls.income;
-        control.push(this.initIncomeFields());
-        break;
-      }
-      case 'Desembolso Fixo Obrigatório': {
-
-        break;
-      }
-      case 'Desembolso Fixo Não-Obrigatório': {
-
-        break;
-      }
-      case 'Desembolso Variável Obrigatório': {
-
-        break;
-      }
-      case 'Desembolso Variável Não-Obrigatório': {
-
-        break;
-      }
-      case 'Ativos Financeiros': {
-
-        break;
-      }
-      case 'Ativos Não-Financeiros': {
-
-        break;
-      }
-      case 'Dívidas': {
-
-      }
-    }
+    const control = <FormArray>this.form.controls.formArray;
+    control.push(this.initFields());
   }
 
   removeField(i: number): void {
-    switch (this.category.name) {
-      case 'Receitas': {
-        const control = <FormArray>this.form.controls.income;
-        control.removeAt(i);
-        break;
-      }
-      case 'Desembolso Fixo Obrigatório': {
+    const control = <FormArray>this.form.controls.formArray;
+    control.removeAt(i);
+  }
 
-        break;
-      }
-      case 'Desembolso Fixo Não-Obrigatório': {
-
-        break;
-      }
-      case 'Desembolso Variável Obrigatório': {
-
-        break;
-      }
-      case 'Desembolso Variável Não-Obrigatório': {
-
-        break;
-      }
-      case 'Ativos Financeiros': {
-
-        break;
-      }
-      case 'Ativos Não-Financeiros': {
-
-        break;
-      }
-      case 'Dívidas': {
-
-      }
-    }
+  onSubmit(val: any) {
+    console.log(val);
   }
 
   onGoBack() {
