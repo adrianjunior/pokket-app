@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Pokket App",
+  "short_name": "Pokket",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
