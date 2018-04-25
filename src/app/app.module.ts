@@ -7,6 +7,7 @@ import { NativeStorage } from '@ionic-native/native-storage'
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { FormProvider } from '../providers/form/form';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HomePage } from '../pages/home/home';
     StatusBar,
     SplashScreen,
     NativeStorage,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    FormProvider
   ]
 })
 export class AppModule {}
