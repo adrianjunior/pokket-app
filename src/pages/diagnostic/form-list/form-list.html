@@ -14,7 +14,7 @@
   <ion-list>
     <ion-item no-lines *ngFor="let category of categories">
       <ion-card [navPush]="formPage" [navParams]="category">
-        <img src="../../../{{category.image}}"/>
+        <img src="{{category.image}}"/>
         <ion-card-content>
           <ion-card-title style="white-space: normal;">
             {{category.name}}
