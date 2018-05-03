@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { debugOutputAstAsTypeScript } from '@angular/compiler';
 
-import { FormProvider } from '../../../providers/form/form';
 import { Category } from '../../../assets/data/category.interface';
 import { Income } from '../../../assets/data/income.interface';
 
@@ -18,7 +17,7 @@ export class FormPage implements OnInit {
   category: Category;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public alertCtrl: AlertController, public formBuilder: FormBuilder, public formProvider: FormProvider) { }
+    public alertCtrl: AlertController, public formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.category = this.navParams.data;
@@ -113,28 +112,20 @@ export class FormPage implements OnInit {
     console.log(val.formArray);
     switch (this.category.name) {
       case 'Receitas': {
-        this.formProvider.setIncomeList(val.formArray);
       }
       case 'Desembolso Fixo Obrigatório': {
-        
       }
       case 'Desembolso Fixo Não-Obrigatório': {
-        
       }
       case 'Desembolso Variável Obrigatório': {
-        
       }
       case 'Desembolso Variável Não-Obrigatório': {
-        
       }
       case 'Ativos Financeiros': {
-        
       }
       case 'Ativos Não-Financeiros': {
-        
       }
       case 'Dívidas': {
-        
       }
     }
   }
