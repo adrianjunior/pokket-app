@@ -4,7 +4,8 @@ import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { debugOutputAstAsTypeScript } from '@angular/compiler';
 
 import { Category } from '../../../assets/data/category.interface';
-import { Income } from '../../../assets/data/income.interface';
+import { Value } from '../../../assets/data/value.interface';
+import { FormProvider } from '../../../providers/form/form';
 
 @IonicPage()
 @Component({
@@ -15,12 +16,15 @@ export class FormPage implements OnInit {
 
   form: FormGroup;
   category: Category;
+  value: Value;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public alertCtrl: AlertController, public formBuilder: FormBuilder) { }
+    public alertCtrl: AlertController, public formBuilder: FormBuilder,
+    public formProvider: FormProvider) { }
 
   ngOnInit() {
     this.category = this.navParams.data;
+    this.onLoadValues();
     this.initForm();
   }
 
@@ -110,24 +114,11 @@ export class FormPage implements OnInit {
 
   onSubmit(val: any) {
     console.log(val.formArray);
-    switch (this.category.name) {
-      case 'Receitas': {
-      }
-      case 'Desembolso Fixo Obrigatório': {
-      }
-      case 'Desembolso Fixo Não-Obrigatório': {
-      }
-      case 'Desembolso Variável Obrigatório': {
-      }
-      case 'Desembolso Variável Não-Obrigatório': {
-      }
-      case 'Ativos Financeiros': {
-      }
-      case 'Ativos Não-Financeiros': {
-      }
-      case 'Dívidas': {
-      }
-    }
+    this.formProvider.setValues(this.category.name, val.formArray);
+  }
+
+  onLoadValues() {
+    this.formProvider.getValues(this.category.name);
   }
 
   onGoBack() {
