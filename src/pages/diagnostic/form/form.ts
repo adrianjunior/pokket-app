@@ -112,9 +112,9 @@ export class FormPage implements OnInit {
     control.removeAt(i);
   }
 
-  onSubmit(val: any) {
+  onSubmit(val: any, length: number) {
     console.log(val.formArray);
-    this.formProvider.setValues(this.category.name, val.formArray);
+    this.formProvider.setValues(this.category.name, val.formArray, length);
   }
 
   onLoadValues() {

@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { LoadingController, ToastController, NavController } from 'ionic-angular';
+import { LoadingController, ToastController } from 'ionic-angular';
 import { Value } from '../../assets/data/value.interface';
 
 @Injectable()
 export class FormProvider {
 
   values: Value[];
+  numberList: number[] = [];
+  categoryList: string[] = ['Receitas', 'Desembolso Fixo Obrigatório', 'Desembolso Fixo Não-Obrigatório', 
+  'Desembolso Variável Obrigatório', 'Desembolso Variável Não-Obrigatório', 'Ativos Financeiros', 
+  'Ativos Não-Financeiros', 'Dívidas'];
 
   constructor(private storage: Storage, public loadingCtrl: LoadingController,
-    public toastCtrl: ToastController, public navCtrl: NavController) {}
+    public toastCtrl: ToastController) {}
 
-  setValues(key: string, list) {
+  setValues(key: string, list, length) {
     let loader = this.loadingCtrl.create({
       content: `Salvando sua lista de ${key}`
     });
     loader.present();
     this.storage.set(key, list)
+                .then(() => {
+                  this.setNumber(key, length);
+                }) 
                 .then(value => {
                   console.log(`Value: ${value}`);
                   console.log(value);
@@ -26,7 +33,6 @@ export class FormProvider {
                   });
                   toast.present();
                   loader.dismiss();
-                  this.navCtrl.pop();
                 })
                 .catch(err => {
                   console.log(`Error: ${err}`);
@@ -71,4 +77,25 @@ export class FormProvider {
                 });
   }
 
+  setNumber(key, length) {
+    this.storage.set(`length ${key}`, length)
+                .catch(err => {
+                  let toast = this.toastCtrl.create({
+                    message: `Houve um erro salvando a quantidade de ${key}. :(`,
+                    duration: 3000
+                  });
+                  toast.present();
+                })
+  }
+
+  getNumbers() {
+    this.categoryList.forEach((item, index) => {
+      this.storage.get(`length ${item}`)
+                  .then(value => {
+                    this.numberList[index] = value;
+                  })
+    });
+    console.log(this.numberList)
+    return this.numberList;
+  }
 }

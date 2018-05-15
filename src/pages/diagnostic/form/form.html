@@ -11,7 +11,7 @@
 
 <ion-content>
 
-    <form [formGroup]="form" class="form" *ngIf="category.name === 'Receitas'" (ngSubmit)="onSubmit(form.value)">
+    <form [formGroup]="form" class="form" *ngIf="category.name === 'Receitas'" (ngSubmit)="onSubmit(form.value, form.controls.formArray.controls.length)">
         <div formArrayName="formArray">
             <ion-list [formGroupName]="i" *ngFor="let income of form.controls.formArray.controls; let i = index">
                 <ion-item>

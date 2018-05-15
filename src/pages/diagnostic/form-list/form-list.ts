@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 
 import { Category } from '../../../assets/data/category.interface';
 import categories from '../../../assets/data/categories';
+import { FormProvider } from '../../../providers/form/form';
 
 @IonicPage()
 @Component({
@@ -13,8 +14,10 @@ export class FormListPage implements OnInit {
 
   formPage = `FormPage`;
   categories: Category[];
+  numberList: number[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public alertCtrl: AlertController, public formProvider: FormProvider) {
   }
 
   ionViewDidLoad() {
@@ -23,6 +26,7 @@ export class FormListPage implements OnInit {
 
   ngOnInit() {
     this.categories = categories;
+    this.numberList = this.formProvider.getNumbers();
   }
 
   onGoBack() {
