@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { debugOutputAstAsTypeScript } from '@angular/compiler';
+import { Storage } from '@ionic/storage';
 
 import { Category } from '../../../assets/data/category.interface';
 import { Value } from '../../../assets/data/value.interface';
@@ -16,11 +17,12 @@ export class FormPage implements OnInit {
 
   form: FormGroup;
   category: Category;
-  value: Value;
+  values: Value[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, public formBuilder: FormBuilder,
-    public formProvider: FormProvider) { }
+    public formProvider: FormProvider, private storage: Storage,
+    public loadingCtrl: LoadingController, public toastCtrl: ToastController) { }
 
   ngOnInit() {
     this.category = this.navParams.data;
@@ -36,67 +38,71 @@ export class FormPage implements OnInit {
     });
   }
 
-  initFields(): FormGroup {
+  initFields(value = {
+    name: '', value: '', product: '', type: '', institution: '', invDate: '', initialValue: '',
+    currentValue: '', description: '', buyDate: '', provider: '', buyValue: '', creditor: '',
+    debtDate: '', interest: '', mainValue: '', remainingValue: ''
+  }): FormGroup {
     switch (this.category.name) {
       case 'Receitas': {
         return this.formBuilder.group({
-          name: ['', Validators.required],
-          value: ['', Validators.required]
+          name: [value.name, Validators.required],
+          value: [value.value, Validators.required]
         });
       }
       case 'Desembolso Fixo Obrigatório': {
         return this.formBuilder.group({
-          name: ['', Validators.required],
-          value: ['', Validators.required]
+          name: [value.name, Validators.required],
+          value: [value.value, Validators.required]
         });
       }
       case 'Desembolso Fixo Não-Obrigatório': {
         return this.formBuilder.group({
-          name: ['', Validators.required],
-          value: ['', Validators.required]
+          name: [value.name, Validators.required],
+          value: [value.value, Validators.required]
         });
       }
       case 'Desembolso Variável Obrigatório': {
         return this.formBuilder.group({
-          name: ['', Validators.required],
-          value: ['', Validators.required]
+          name: [value.name, Validators.required],
+          value: [value.value, Validators.required]
         });
       }
       case 'Desembolso Variável Não-Obrigatório': {
         return this.formBuilder.group({
-          name: ['', Validators.required],
-          value: ['', Validators.required]
+          name: [value.name, Validators.required],
+          value: [value.value, Validators.required]
         });
       }
       case 'Ativos Financeiros': {
         return this.formBuilder.group({
-          product: ['', Validators.required],
-          type: ['', Validators.required],
-          institution: ['', Validators.required],
-          invDate: ['', Validators.required],
-          initialValue: ['', Validators.required],
-          currentValue: ['', Validators.required]
+          product: [value.product, Validators.required],
+          type: [value.type, Validators.required],
+          institution: [value.institution, Validators.required],
+          invDate: [value.invDate, Validators.required],
+          initialValue: [value.initialValue, Validators.required],
+          currentValue: [value.currentValue, Validators.required]
         });
       }
       case 'Ativos Não-Financeiros': {
         return this.formBuilder.group({
-          description: ['', Validators.required],
-          type: ['', Validators.required],
-          buyDate: ['', Validators.required],
-          provider: ['', Validators.required],
-          buyValue: ['', Validators.required],
-          currentValue: ['', Validators.required]
+          description: [value.description, Validators.required],
+          type: [value.type, Validators.required],
+          buyDate: [value.buyDate, Validators.required],
+          provider: [value.provider, Validators.required],
+          buyValue: [value.buyValue, Validators.required],
+          currentValue: [value.currentValue, Validators.required]
         });
       }
       case 'Dívidas': {
         return this.formBuilder.group({
-          description: ['', Validators.required],
-          type: ['', Validators.required],
-          creditor: ['', Validators.required],
-          debtDate: ['', Validators.required],
-          interest: ['', Validators.required],
-          mainValue: ['', Validators.required],
-          remainingValue: ['', Validators.required]
+          description: [value.description, Validators.required],
+          type: [value.type, Validators.required],
+          creditor: [value.creditor, Validators.required],
+          debtDate: [value.debtDate, Validators.required],
+          interest: [value.interest, Validators.required],
+          mainValue: [value.mainValue, Validators.required],
+          remainingValue: [value.remainingValue, Validators.required]
         });
       }
     }
@@ -112,13 +118,37 @@ export class FormPage implements OnInit {
     control.removeAt(i);
   }
 
+  fillField(value): void {
+    const control = <FormArray>this.form.controls.formArray;
+    control.push(this.initFields(value))
+  }
+
   onSubmit(val: any, length: number) {
     console.log(val.formArray);
     this.formProvider.setValues(this.category.name, val.formArray, length);
   }
 
   onLoadValues() {
-    this.formProvider.getValues(this.category.name);
+    this.storage.get(this.category.name)
+                .then(value => {
+                  if(value != null) {
+                    this.values = value;
+                    this.removeField(0);
+                    for(let i = 0; i < this.values.length; i++) {
+                      this.fillField(this.values[i]);
+                    }
+                  }
+                  console.log(`Values: ${this.values}`);                
+                })
+                .catch(err => {
+                  console.log(`Error: ${err}`);
+                  console.log(err);
+                  let toast = this.toastCtrl.create({
+                    message: `Não foi possível carregar sua lista. :(`,
+                    duration: 3000
+                  });
+                  toast.present();
+                });
   }
 
   onGoBack() {

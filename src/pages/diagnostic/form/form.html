@@ -38,7 +38,7 @@
         </button>
     </form>
 
-    <form [formGroup]="form" class="form" *ngIf="category.name === 'Desembolso Fixo Obrigatório'" (ngSubmit)="onSubmit(form.value)">
+    <form [formGroup]="form" class="form" *ngIf="category.name === 'Desembolso Fixo Obrigatório'" (ngSubmit)="onSubmit(form.value, form.controls.formArray.controls.length)">
         <div formArrayName="formArray">
             <ion-list [formGroupName]="i" *ngFor="let dfo of form.controls.formArray.controls; let i = index">
                 <ion-item>
@@ -65,7 +65,7 @@
         </button>
     </form>
 
-    <form [formGroup]="form" class="form" *ngIf="category.name === 'Desembolso Fixo Não-Obrigatório'" (ngSubmit)="onSubmit(form.value)">
+    <form [formGroup]="form" class="form" *ngIf="category.name === 'Desembolso Fixo Não-Obrigatório'" (ngSubmit)="onSubmit(form.value, form.controls.formArray.controls.length)">
         <div formArrayName="formArray">
             <ion-list [formGroupName]="i" *ngFor="let dfno of form.controls.formArray.controls; let i = index">
                 <ion-item>
@@ -92,7 +92,7 @@
         </button>
     </form>
 
-    <form [formGroup]="form" class="form" *ngIf="category.name === 'Desembolso Variável Obrigatório'" (ngSubmit)="onSubmit(form.value)">
+    <form [formGroup]="form" class="form" *ngIf="category.name === 'Desembolso Variável Obrigatório'" (ngSubmit)="onSubmit(form.value, form.controls.formArray.controls.length)">
         <div formArrayName="formArray">
             <ion-list [formGroupName]="i" *ngFor="let dvo of form.controls.formArray.controls; let i = index">
                 <ion-item>
@@ -119,7 +119,7 @@
         </button>
     </form>
 
-    <form [formGroup]="form" class="form" *ngIf="category.name === 'Desembolso Variável Não-Obrigatório'" (ngSubmit)="onSubmit(form.value)">
+    <form [formGroup]="form" class="form" *ngIf="category.name === 'Desembolso Variável Não-Obrigatório'" (ngSubmit)="onSubmit(form.value, form.controls.formArray.controls.length)">
         <div formArrayName="formArray">
             <ion-list [formGroupName]="i" *ngFor="let dvno of form.controls.formArray.controls; let i = index">
                 <ion-item>
@@ -146,7 +146,7 @@
         </button>
     </form>
 
-    <form [formGroup]="form" class="form" *ngIf="category.name === 'Ativos Financeiros'" (ngSubmit)="onSubmit(form.value)">
+    <form [formGroup]="form" class="form" *ngIf="category.name === 'Ativos Financeiros'" (ngSubmit)="onSubmit(form.value, form.controls.formArray.controls.length)">
         <div formArrayName="formArray">
             <ion-list [formGroupName]="i" *ngFor="let af of form.controls.formArray.controls; let i = index">
                 <ion-item>
@@ -189,7 +189,7 @@
         </button>
     </form>
 
-    <form [formGroup]="form" class="form" *ngIf="category.name === 'Ativos Não-Financeiros'" (ngSubmit)="onSubmit(form.value)">
+    <form [formGroup]="form" class="form" *ngIf="category.name === 'Ativos Não-Financeiros'" (ngSubmit)="onSubmit(form.value, form.controls.formArray.controls.length)">
         <div formArrayName="formArray">
             <ion-list [formGroupName]="i" *ngFor="let anf of form.controls.formArray.controls; let i = index">
                 <ion-item>
@@ -232,7 +232,7 @@
         </button>
     </form>
 
-    <form [formGroup]="form" class="form" *ngIf="category.name === 'Dívidas'" (ngSubmit)="onSubmit(form.value)">
+    <form [formGroup]="form" class="form" *ngIf="category.name === 'Dívidas'" (ngSubmit)="onSubmit(form.value, form.controls.formArray.controls.length)">
         <div formArrayName="formArray">
             <ion-list [formGroupName]="i" *ngFor="let dividas of form.controls.formArray.controls; let i = index">
                 <ion-item>

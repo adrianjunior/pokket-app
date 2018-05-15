@@ -79,6 +79,9 @@ export class FormProvider {
 
   setNumber(key, length) {
     this.storage.set(`length ${key}`, length)
+                .then(value => {
+                  console.log(`ESCRITA: Valor: ${value} / Key: ${key}`)
+                })
                 .catch(err => {
                   let toast = this.toastCtrl.create({
                     message: `Houve um erro salvando a quantidade de ${key}. :(`,
@@ -93,6 +96,7 @@ export class FormProvider {
       this.storage.get(`length ${item}`)
                   .then(value => {
                     this.numberList[index] = value;
+                    console.log(`LEITURA: Valor: ${value} / Key: ${item}`)
                   })
     });
     console.log(this.numberList)

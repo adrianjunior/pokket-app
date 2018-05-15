@@ -14,19 +14,19 @@ export class FormListPage implements OnInit {
 
   formPage = `FormPage`;
   categories: Category[];
-  numberList: number[];
+  numberList: number[] = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, public formProvider: FormProvider) {
-  }
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FormListPage');
+  ionViewWillEnter() {
+    console.log('ionViewDidEnter FormListPage');
+    this.numberList = this.formProvider.getNumbers();
   }
 
   ngOnInit() {
     this.categories = categories;
-    this.numberList = this.formProvider.getNumbers();
   }
 
   onGoBack() {
