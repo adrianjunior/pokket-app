@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="onGoBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Ver Diagnóstico</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div style="display: block;">
+    <canvas baseChart 
+    [data] = 'doughnutChartData'
+    [labels] = 'doughnutChartLabels'
+    [chartType] = 'doughnutChartType'
+    
+    >
+
+    </canvas>
+  </div>
+
+</ion-content>  

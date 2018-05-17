@@ -8,7 +8,7 @@ import { IonicStorageModule } from '@ionic/storage'
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { FormProvider } from '../providers/form/form';
-
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 @NgModule({
   declarations: [
     MyApp,
@@ -17,7 +17,8 @@ import { FormProvider } from '../providers/form/form';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
