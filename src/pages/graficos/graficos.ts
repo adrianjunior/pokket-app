@@ -13,6 +13,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 export class GraficosPage {
 
+  formListPage = `FormListPage`;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -22,7 +24,7 @@ export class GraficosPage {
 
   public BarChartLabels: string[] = ["Apressados", "Com Calma", "Tranquilos"];
   public BarChartType: string = 'bar';
-  public BarChartDataSets: object = [
+  public BarChartDataSets: Object = [
     {
       label: 'Meus: ',
       data: [12, 50, 20],
@@ -35,7 +37,7 @@ export class GraficosPage {
     }
   ];
 
-  public BarObjectOptions: object = {
+  public BarObjectOptions: Object = {
     scales: {
       yAxes: [{
         ticks: {

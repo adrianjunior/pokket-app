@@ -10,11 +10,11 @@
       <p>Você ainda não possui um diagnóstico.</p>
     </ion-row>
     <ion-row justify-content-center>
-      <button ion-button block [navPush]="formTutorialPage">Fazer Diagnóstico</button>
+      <button *ngIf="isDiagnosticDone != true" ion-button block [navPush]="formTutorialPage">Fazer Diagnóstico</button>
     </ion-row>
     
     <ion-row justify-content-center>
-      <button ion-button block [navPush]="navGraficosPage">Ver Diagnóstico</button>
+      <button *ngIf="isDiagnosticDone == true" ion-button block [navPush]="navGraficosPage">Ver Diagnóstico</button>
     </ion-row>
   </ion-grid>
 
