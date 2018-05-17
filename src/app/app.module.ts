@@ -6,13 +6,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage'
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { FormProvider } from '../providers/form/form';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
   ],
   imports: [
     BrowserModule,
@@ -23,7 +21,6 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
   ],
   providers: [
     StatusBar,

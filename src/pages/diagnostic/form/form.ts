@@ -118,14 +118,42 @@ export class FormPage implements OnInit {
     control.removeAt(i);
   }
 
-  fillField(value): void {
+  addFilledField(value): void {
     const control = <FormArray>this.form.controls.formArray;
     control.push(this.initFields(value))
   }
 
   onSubmit(val: any, length: number) {
     console.log(val.formArray);
-    this.formProvider.setValues(this.category.name, val.formArray, length);
+    let loader = this.loadingCtrl.create({
+      content: `Salvando sua lista de ${this.category.name}`
+    });
+    loader.present();
+    this.storage.set(this.category.name, val.formArray)
+                .then(() => {
+                  this.formProvider.setNumber(this.category.name, length);
+                }) 
+                .then(value => {
+                  console.log(`Value: ${value}`);
+                  console.log(value);
+                  let toast = this.toastCtrl.create({
+                    message: `Lista salva com sucesso!`,
+                    duration: 3000
+                  });
+                  toast.present();
+                  loader.dismiss();
+                  this.navCtrl.pop();
+                })
+                .catch(err => {
+                  console.log(`Error: ${err}`);
+                  console.log(err);
+                  let toast = this.toastCtrl.create({
+                    message: `Não foi possível salvar sua lista. :(`,
+                    duration: 3000
+                  });
+                  toast.present();
+                  loader.dismiss();
+                });
   }
 
   onLoadValues() {
@@ -135,7 +163,7 @@ export class FormPage implements OnInit {
                     this.values = value;
                     this.removeField(0);
                     for(let i = 0; i < this.values.length; i++) {
-                      this.fillField(this.values[i]);
+                      this.addFilledField(this.values[i]);
                     }
                   }
                   console.log(`Values: ${this.values}`);                

@@ -12,6 +12,7 @@
 <ion-content>
 
   <ion-list>
+    <button color="#ffffff" [disabled]="1 == 1" outline></button>
     <ion-item no-lines *ngFor="let category of categories; let i = index">
       <ion-card [navPush]="formPage" [navParams]="category">
         <img src="{{category.image}}"/>
@@ -36,7 +37,12 @@
           </ion-grid>
         </ion-card-content>
       </ion-card>
+      <img *ngIf="i < 7" src="assets/imgs/linha.png" style="display: block; margin: auto;"/>
+      <button color="#ffffff" [disabled]="1 == 1" *ngIf="i == 7" outline></button>
     </ion-item>
-  </ion-list>
+  </ion-list> 
+  <ion-fab right bottom>
+    <button ion-fab [navPush]="navGraficosPage"><ion-icon name="checkmark"></ion-icon></button>
+  </ion-fab>
 
 </ion-content>

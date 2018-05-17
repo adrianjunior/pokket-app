@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, ModalController } from 'ionic-angular';
 
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -8,8 +9,7 @@ import { IonicPage, NavController, ModalController } from 'ionic-angular';
 export class HomePage {
 
   formTutorialPage = `FormTutorialPage`;
-
-  NavGraficosPage = `GraficosPage`; // Navegacao ate os graficos
+  navGraficosPage = `GraficosPage`; // Navegacao ate os graficos
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController) {}
 
