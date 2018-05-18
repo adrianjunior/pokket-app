@@ -11,7 +11,7 @@ Os membros da equipe
 
 Nosso cliente é o professor <b>Érico Veras Marques</b>
 
-<b>PokketApp</b> é um aplicativo que auxilie o usuário em decisões financeiras do dia-a-dia.
+<b>PokketApp</b> é um aplicativo que auxilia o usuário em decisões financeiras do dia-a-dia.
 
 ## Executar os comandos:
 
@@ -20,6 +20,12 @@ $ npm install -g ionic cordova
 ```
 ``` sh
 $ git clone https://github.com/adrianjunior/pokket-app.git
+```
+``` sh
+$ npm install ng2-charts --save
+```
+``` sh
+$ npm install chart.js --save
 ```
 
 ## Executar aplicação:
