@@ -6,7 +6,6 @@ import { Storage } from '@ionic/storage';
 
 import { Category } from '../../../assets/data/category.interface';
 import { Value } from '../../../assets/data/value.interface';
-import { FormProvider } from '../../../providers/form/form';
 
 @IonicPage()
 @Component({
@@ -21,8 +20,8 @@ export class FormPage implements OnInit {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, public formBuilder: FormBuilder,
-    public formProvider: FormProvider, private storage: Storage,
-    public loadingCtrl: LoadingController, public toastCtrl: ToastController) { }
+    private storage: Storage, public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController) { }
 
   ngOnInit() {
     this.category = this.navParams.data;
@@ -131,7 +130,7 @@ export class FormPage implements OnInit {
     loader.present();
     this.storage.set(this.category.name, val.formArray)
                 .then(() => {
-                  this.formProvider.setNumber(this.category.name, length);
+                  this.setNumber(this.category.name, length);
                 }) 
                 .then(value => {
                   console.log(`Value: ${value}`);
@@ -177,6 +176,10 @@ export class FormPage implements OnInit {
                   });
                   toast.present();
                 });
+  }
+
+  setNumber(name: string, length:number) {
+    this.storage.set(`length ${name}`, length);
   }
 
   onGoBack() {
