@@ -137,7 +137,7 @@ export class FormPage implements OnInit {
                   console.log(`Value: ${value}`);
                   console.log(value);
                   let toast = this.toastCtrl.create({
-                    message: `Lista salva com sucesso!`,
+                    message: `Valores salvos com sucesso!`,
                     duration: 3000
                   });
                   toast.present();

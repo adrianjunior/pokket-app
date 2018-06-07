@@ -18,6 +18,10 @@ export class FormListPage implements OnInit {
   categories: Category[];
   numberList: number[] = [];
 
+  categoryList: string[] = ['Receitas', 'Desembolso Fixo Obrigatório', 'Desembolso Fixo Não-Obrigatório', 
+  'Desembolso Variável Obrigatório', 'Desembolso Variável Não-Obrigatório', 'Ativos Financeiros', 
+  'Ativos Não-Financeiros', 'Dívidas'];
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, public formProvider: FormProvider,
     private storage: Storage, public loadingCtrl: LoadingController,
@@ -25,8 +29,7 @@ export class FormListPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    console.log('ionViewDidEnter FormListPage');
-    this.numberList = this.formProvider.getNumbers();
+    this.numberList = this.getNumbers();
   }
 
   ngOnInit() {
@@ -61,6 +64,18 @@ export class FormListPage implements OnInit {
                   toast.present();
                   loader.dismiss();
                 });
+  }
+
+  getNumbers() {
+    this.categoryList.forEach((item, index) => {
+      this.storage.get(`length ${item}`)
+                  .then(value => {
+                    this.numberList[index] = value;
+                    console.log(`LEITURA: Valor: ${value} / Key: ${item}`)
+                  })
+    });
+    console.log(this.numberList)
+    return this.numberList;
   }
 
 }

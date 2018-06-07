@@ -110,4 +110,24 @@ export class HomePage {
                 });
   }
 
+  revert() {
+    this.storage.set('Diagnostic', false)
+                .then(value => {
+                  let toast = this.toastCtrl.create({
+                    message: `Sucesso!`,
+                    duration: 3000
+                  });
+                  toast.present();
+                })
+                .catch(err => {
+                  console.log(`Error: ${err}`);
+                  console.log(err);
+                  let toast = this.toastCtrl.create({
+                    message: 'Falha!  ',
+                    duration: 3000
+                  });
+                  toast.present();
+                });
+  }
+
 }
