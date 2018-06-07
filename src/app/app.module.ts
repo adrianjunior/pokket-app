@@ -6,7 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage'
 
 import { MyApp } from './app.component';
-import { FormProvider } from '../providers/form/form';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 @NgModule({
   declarations: [
@@ -25,8 +24,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    FormProvider
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

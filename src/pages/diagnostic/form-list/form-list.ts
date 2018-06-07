@@ -4,7 +4,6 @@ import { Storage } from '@ionic/storage';
 
 import { Category } from '../../../assets/data/category.interface';
 import categories from '../../../assets/data/categories';
-import { FormProvider } from '../../../providers/form/form';
 
 @IonicPage()
 @Component({
@@ -23,8 +22,7 @@ export class FormListPage implements OnInit {
   'Ativos Não-Financeiros', 'Dívidas'];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public alertCtrl: AlertController, public formProvider: FormProvider,
-    private storage: Storage, public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,private storage: Storage, public loadingCtrl: LoadingController,
     public toastCtrl: ToastController) {
   }
 
