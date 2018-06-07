@@ -15,7 +15,6 @@ export class FormListPage implements OnInit {
 
   formPage = `FormPage`;
   homePage = `HomePage`;
-  navGraficosPage = `GraficosPage`;
   categories: Category[];
   numberList: number[] = [];
 

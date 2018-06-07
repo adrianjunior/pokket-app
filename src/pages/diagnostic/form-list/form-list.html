@@ -12,7 +12,6 @@
 <ion-content>
 
   <ion-list>
-    <button color="#ffffff" [disabled]="1 == 1" outline></button>
     <ion-item no-lines *ngFor="let category of categories; let i = index">
       <ion-card [navPush]="formPage" [navParams]="category">
         <img src="{{category.image}}"/>
@@ -30,18 +29,17 @@
               </ion-col>
             </ion-row>
             <ion-row>
-              <p style="white-space: normal;">
+              <p ion-text text-wrap>
                 {{category.description}}
               </p>
             </ion-row>
           </ion-grid>
         </ion-card-content>
       </ion-card>
-      <button color="#ffffff" [disabled]="1 == 1" *ngIf="i == 7" outline></button>
     </ion-item>
   </ion-list> 
   <ion-fab right bottom>
-    <button ion-fab [navPush]="navGraficosPage"><ion-icon name="checkmark"></ion-icon></button>
+    <button ion-fab [navPush]="homePage" (click)="onGenerateDiagnostic()"><ion-icon name="checkmark"></ion-icon></button>
   </ion-fab>
 
 </ion-content>

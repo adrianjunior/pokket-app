@@ -4,20 +4,28 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-grid>
-    <ion-row justify-content-center>
-      <p>Você ainda não possui um diagnóstico.</p>
-    </ion-row>
-    <ion-row justify-content-center>
-      <button *ngIf="isDiagnosticDone != true" ion-button block [navPush]="formTutorialPage">Fazer Diagnóstico</button>
-    </ion-row>
-    
-    <ion-row justify-content-center>
-      <button *ngIf="isDiagnosticDone == true" ion-button block [navPush]="navGraficosPage">Ver Diagnóstico</button>
-    </ion-row>
-  </ion-grid>
+<ion-content>
+  <div *ngIf="isDiagnosticDone == false">
+    <img src="../assets/imgs/home.png">
 
+    <ion-fab right bottom>
+      <button ion-fab [navPush]="formListPage">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
 
+  <div style="padding: 16px" *ngIf="isDiagnosticDone == true">
+    <div style="display: block;">
+      <canvas baseChart [data]='doughnutChartData' [labels]='doughnutChartLabels' [chartType]='doughnutChartType'>
+      </canvas>
+    </div>
 
+    <div style="display: block;">
+      <canvas baseChart [datasets]='BarChartDataSets' [labels]='BarChartLabels' [chartType]='BarChartType' [options]='BarObjectOptions'>
+      </canvas>
+    </div>
+
+    <button ion-button block [navPush]="formListPage">Editar Diagnóstico</button>
+  </div>
 </ion-content>
