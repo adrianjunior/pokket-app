@@ -71,8 +71,5 @@ export class IncomePage {
       pointHoverBorderColor: '#3F51B5',
       labels: '#3F51B5'
     }
-
   ];
-
-
 }

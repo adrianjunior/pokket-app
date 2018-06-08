@@ -7,19 +7,23 @@
 
     <ion-content>
         <ion-list no-lines style="margin-top: 3vh">
-            <button menuClose ion-item (click)="openPage(formListPage)">
+            <button menuClose ion-item (click)="openPage(incomePage)">
                 <ion-icon name="cash" item-start></ion-icon>
                 Receitas
             </button>
-            <button menuClose ion-item (click)="openPage(helpPage)">
+            <button menuClose ion-item (click)="openPage(requiredSpentPage)">
                 <ion-icon name="cart" item-start></ion-icon>
-                Desembolsos
+                Desembolsos Obrigatórios
             </button>
-            <button menuClose ion-item (click)="openPage(helpPage)">
+            <button menuClose ion-item (click)="openPage(optionalSpentPage)">
+                <ion-icon name="cart" item-start></ion-icon>
+                Desembolsos Não-Obrigatórios
+            </button>
+            <button menuClose ion-item (click)="openPage(assetPage)">
                 <ion-icon name="trending-up" item-start></ion-icon>
                 Ativos
             </button>
-            <button menuClose ion-item (click)="openPage(helpPage)">
+            <button menuClose ion-item (click)="openPage(debtPage)">
                 <ion-icon name="card" item-start></ion-icon>
                 Dívidas
             </button>

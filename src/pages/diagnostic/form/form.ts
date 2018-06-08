@@ -191,7 +191,16 @@ export class FormPage implements OnInit {
         handler: () => {
           this.navCtrl.pop();
         }
-      }, 'Não, quero ficar.']
+      }, {
+        text: 'Não, quero ficar.',
+        handler: () => {
+          const alert = this.alertCtrl.create({
+            message: 'Para sair sem perder o seu progresso, clique no botão localizado no canto inferior direito da sua tela.',
+            buttons: ['OK']
+          });
+          alert.present();
+        }  
+      }]
     });
     alert.present();
   }

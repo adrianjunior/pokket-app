@@ -1,17 +1,30 @@
 <ion-header>
+
   <ion-toolbar color="primary">
     <ion-buttons left>
       <button menuToggle ion-button icon-only>
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Dívidas</ion-title>
+    <ion-title>Desembolsos Não-Obrigatórios</ion-title>
     <ion-buttons right>
       <button ion-button icon-only>
         <ion-icon name="help"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>
+
+  <ion-toolbar no-border-top color="primary">
+    <ion-segment [(ngModel)]="spent">
+      <ion-segment-button value="fixo">
+        Fixo
+      </ion-segment-button>
+      <ion-segment-button value="variavel">
+        Variável
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
 </ion-header>
 
 <ion-content padding>

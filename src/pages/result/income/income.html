@@ -1,32 +1,32 @@
 <ion-header>
-    <ion-toolbar color="primary">
-      <ion-buttons left>
-        <button menuToggle ion-button icon-only>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-      </ion-buttons>
-      <ion-title>Minhas Receitas</ion-title>
-      <ion-buttons right>
-        <button ion-button icon-only>
-          <ion-icon name="help"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-content padding>
-  
-    <div style="display: block;">
-      <canvas baseChart [data]='doughnutChartData' [labels]='doughnutChartLabels' [chartType]='doughnutChartType'></canvas>
-    </div>
-  
-    <div style="display: block;">
-      <canvas baseChart [datasets]='BarChartDataSets' [labels]='BarChartLabels' [chartType]='BarChartType' [options]='BarObjectOptions'></canvas>
-    </div>
-  
-    <ion-fab right bottom>
-      <button ion-fab [navPush]="formListPage">
-        <ion-icon name="create"></ion-icon>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button menuToggle ion-button icon-only>
+        <ion-icon name="menu"></ion-icon>
       </button>
-    </ion-fab>
-  </ion-content>
+    </ion-buttons>
+    <ion-title>Receitas</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only>
+        <ion-icon name="help"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div style="display: block;">
+    <canvas baseChart [data]='doughnutChartData' [labels]='doughnutChartLabels' [chartType]='doughnutChartType'></canvas>
+  </div>
+
+  <div style="display: block;">
+    <canvas baseChart [datasets]='BarChartDataSets' [labels]='BarChartLabels' [chartType]='BarChartType' [options]='BarObjectOptions'></canvas>
+  </div>
+
+  <ion-fab right bottom>
+    <button ion-fab [navPush]="formListPage">
+      <ion-icon name="create"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { DebtPage } from './debt';
+import { RequiredSpentPage } from './required-spent';
 import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
-    DebtPage,
+    RequiredSpentPage,
   ],
   imports: [
-    IonicPageModule.forChild(DebtPage),
+    IonicPageModule.forChild(RequiredSpentPage),
     ChartsModule
   ],
 })
-export class DebtPageModule {}
+export class RequiredSpentPageModule {}

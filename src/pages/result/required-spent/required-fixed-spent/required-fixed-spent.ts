@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the SpentPage page.
+ * Generated class for the RequiredFixedSpentPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-spent',
-  templateUrl: 'spent.html',
+  selector: 'page-required-fixed-spent',
+  templateUrl: 'required-fixed-spent.html',
 })
-export class SpentPage {
+export class RequiredFixedSpentPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SpentPage');
+    console.log('ionViewDidLoad RequiredFixedSpentPage');
   }
 
 }

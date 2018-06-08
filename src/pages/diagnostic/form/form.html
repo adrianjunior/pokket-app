@@ -1,7 +1,12 @@
 <ion-header>
-    <ion-navbar color="primary">
+    <ion-toolbar color="primary">
+        <ion-buttons left>
+            <button (click)="onGoBack()" ion-button icon-only>
+                <ion-icon name="arrow-back"></ion-icon>
+            </button>
+        </ion-buttons>
         <ion-title>{{category.name}}</ion-title>
-    </ion-navbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>

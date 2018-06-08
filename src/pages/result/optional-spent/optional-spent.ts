@@ -4,11 +4,12 @@ import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
-  selector: 'page-debt',
-  templateUrl: 'debt.html',
+  selector: 'page-optional-spent',
+  templateUrl: 'optional-spent.html',
 })
-export class DebtPage {
+export class OptionalSpentPage {
 
+  spent: string = "fixo";
   formListPage = `FormListPage`;
 
   constructor(public navCtrl: NavController, private storage: Storage) {
@@ -71,5 +72,7 @@ export class DebtPage {
       pointHoverBorderColor: '#3F51B5',
       labels: '#3F51B5'
     }
+
   ];
+
 }

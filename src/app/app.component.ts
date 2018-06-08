@@ -13,13 +13,18 @@ export class MyApp {
   rootPage: any = `FormListPage`;
 
   formListPage = `FormListPage`;
-  resultPage = `ResultPage`;
+  incomePage = `IncomePage`;
+  debtPage = `DebtPage`;
+  assetPage = `AssetPage`;
+  requiredSpentPage = `RequiredSpentPage`;
+  optionalSpentPage = `OptionalSpentPage`;
+  helpPage = `HelpPage`;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage: Storage) {
     storage.get('Diagnostic')
       .then(value => {
         if (value) {
-          this.nav.setRoot(this.resultPage);
+          this.nav.setRoot(this.incomePage);
         } else {
           this.nav.setRoot(this.formListPage);
         }

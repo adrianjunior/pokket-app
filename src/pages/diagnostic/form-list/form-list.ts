@@ -13,7 +13,7 @@ import categories from '../../../assets/data/categories';
 export class FormListPage implements OnInit {
 
   formPage = `FormPage`;
-  resultPage = `ResultPage`;
+  incomePage = `IncomePage`;
   diagnostic: boolean;
   categories: Category[];
   numberList: number[] = [];
