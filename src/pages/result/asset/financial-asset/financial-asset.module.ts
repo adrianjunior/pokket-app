@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { FinancialAssetPage } from './financial-asset';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { FinancialAssetPage } from './financial-asset';
   ],
   imports: [
     IonicPageModule.forChild(FinancialAssetPage),
+    ChartsModule
   ],
 })
 export class FinancialAssetPageModule {}
