@@ -1,6 +1,11 @@
 <ion-header>
     <ion-navbar color="primary">
         <ion-title>Diagnóstico Financeiro</ion-title>
+        <ion-buttons right>
+          <button ion-button icon-only>
+            <ion-icon name="help"></ion-icon>
+          </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 
@@ -34,7 +39,8 @@
     </ion-item>
   </ion-list> 
   <ion-fab right bottom>
-    <button ion-fab [navPush]="homePage" (click)="onGenerateDiagnostic()"><ion-icon name="checkmark"></ion-icon></button>
+    <button ion-fab *ngIf="diagnostic == false" (click)="onGenerateDiagnostic()"><ion-icon name="checkmark"></ion-icon></button>
+    <button  ion-fab *ngIf="diagnostic == true" [navPush]="resultPage"><ion-icon name="checkmark"></ion-icon></button>
   </ion-fab>
 
 </ion-content>

@@ -4,23 +4,22 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 
-import { HomePage } from '../pages/home/home';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = `HomePage`;
+  rootPage: any = `FormListPage`;
 
   formListPage = `FormListPage`;
-  homePage = `HomePage`;
+  resultPage = `ResultPage`;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage: Storage) {
     storage.get('Diagnostic')
       .then(value => {
         if (value) {
-          this.nav.setRoot(this.homePage);
+          this.nav.setRoot(this.resultPage);
         } else {
           this.nav.setRoot(this.formListPage);
         }

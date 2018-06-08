@@ -13,7 +13,8 @@ import categories from '../../../assets/data/categories';
 export class FormListPage implements OnInit {
 
   formPage = `FormPage`;
-  homePage = `HomePage`;
+  resultPage = `ResultPage`;
+  diagnostic: boolean;
   categories: Category[];
   numberList: number[] = [];
 
@@ -22,12 +23,13 @@ export class FormListPage implements OnInit {
   'Ativos Não-Financeiros', 'Dívidas'];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-    public alertCtrl: AlertController,private storage: Storage, public loadingCtrl: LoadingController,
-    public toastCtrl: ToastController) {
+    public alertCtrl: AlertController,private storage: Storage,
+    public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
   }
 
   ionViewWillEnter() {
     this.numberList = this.getNumbers();
+    this.getDiagnostic();
   }
 
   ngOnInit() {
@@ -51,6 +53,7 @@ export class FormListPage implements OnInit {
                   });
                   toast.present();
                   loader.dismiss();
+                  this.navCtrl.setRoot(`ResultPage`);
                 })
                 .catch(err => {
                   console.log(`Error: ${err}`);
@@ -74,6 +77,17 @@ export class FormListPage implements OnInit {
     });
     console.log(this.numberList)
     return this.numberList;
+  }
+
+  getDiagnostic() {
+    this.storage.get('Diagnostic')
+      .then(value => {
+        if (value) {
+          this.diagnostic = true;
+        } else {
+          this.diagnostic = false;
+        }
+      })
   }
 
 }

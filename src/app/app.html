@@ -1,17 +1,29 @@
-<!--<ion-menu [content]="content">
+<ion-menu [content]="content">
     <ion-header>
         <ion-toolbar color="primary">
-            <ion-title>Menu</ion-title>
+            <ion-title>Meu Diagnóstico</ion-title>
         </ion-toolbar>
     </ion-header>
 
     <ion-content>
         <ion-list no-lines style="margin-top: 3vh">
-            <button menuClose ion-item (click)="openPage(formListPage)" *ngIf="isDiagnosticDone == false">
-                <ion-icon name="add" item-start></ion-icon>
-                Fazer Diagnóstico
+            <button menuClose ion-item (click)="openPage(formListPage)">
+                <ion-icon name="cash" item-start></ion-icon>
+                Receitas
             </button>
-            <button menuClose ion-item [disabled]="1 == 1" (click)="openPage(helpPage)">
+            <button menuClose ion-item (click)="openPage(helpPage)">
+                <ion-icon name="cart" item-start></ion-icon>
+                Desembolsos
+            </button>
+            <button menuClose ion-item (click)="openPage(helpPage)">
+                <ion-icon name="trending-up" item-start></ion-icon>
+                Ativos
+            </button>
+            <button menuClose ion-item (click)="openPage(helpPage)">
+                <ion-icon name="card" item-start></ion-icon>
+                Dívidas
+            </button>
+            <button menuClose ion-item (click)="openPage(helpPage)">
                 <ion-icon name="help" item-start></ion-icon>
                 Ajuda
             </button>
@@ -19,5 +31,4 @@
     </ion-content>
 </ion-menu>
 
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>-->
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
