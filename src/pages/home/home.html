@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Pokket</ion-title>
+    <ion-title *ngIf="isDiagnosticDone == false">Página Inicial</ion-title>
+    <ion-title *ngIf="isDiagnosticDone == true">Resultados do Diagnóstico</ion-title>
   </ion-toolbar>
 </ion-header>
 

@@ -1,1 +1,23 @@
+<!--<ion-menu [content]="content">
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+        <ion-list no-lines style="margin-top: 3vh">
+            <button menuClose ion-item (click)="openPage(formListPage)" *ngIf="isDiagnosticDone == false">
+                <ion-icon name="add" item-start></ion-icon>
+                Fazer Diagnóstico
+            </button>
+            <button menuClose ion-item [disabled]="1 == 1" (click)="openPage(helpPage)">
+                <ion-icon name="help" item-start></ion-icon>
+                Ajuda
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>-->
 <ion-nav [root]="rootPage"></ion-nav>
