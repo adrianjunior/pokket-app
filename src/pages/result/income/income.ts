@@ -10,12 +10,15 @@ import { Storage } from '@ionic/storage';
 export class IncomePage {
 
   formListPage = `FormListPage`;
+  graficos: string = 'pie';
+
+  data = []
 
   constructor(public navCtrl: NavController, private storage: Storage) {
   }
 
-  public doughnutChartLabels:string[] = ['Dados 1','Dados 2', 'Dados 3'];
-  public doughnutChartData:number[] = [1500,3000,1235];
+  public doughnutChartLabels:string[] = [];
+  public doughnutChartData:number[] = [];
   public doughnutChartType:string = 'doughnut';
 
   public BarChartLabels: string[] = ["Apressados", "Com Calma", "Tranquilos"];
@@ -72,4 +75,17 @@ export class IncomePage {
       labels: '#3F51B5'
     }
   ];
+
+  ionViewWillEnter() {
+    this.storage.get('Receitas')
+      .then( value => {
+        this.data = value;
+        console.log(this.data);
+
+        for(let d of this.data) {
+          this.doughnutChartLabels.push(d.name);
+          this.doughnutChartData.push(d.value);
+        }
+      })
+  }
 }
