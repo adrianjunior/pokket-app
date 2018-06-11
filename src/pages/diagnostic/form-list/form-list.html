@@ -40,7 +40,7 @@
   </ion-list> 
   <ion-fab right bottom>
     <button ion-fab *ngIf="diagnostic == false" (click)="onGenerateDiagnostic()"><ion-icon name="checkmark"></ion-icon></button>
-    <button  ion-fab *ngIf="diagnostic == true" [navPush]="resultPage"><ion-icon name="checkmark"></ion-icon></button>
+    <button  ion-fab *ngIf="diagnostic == true" [navPush]="incomePage"><ion-icon name="checkmark"></ion-icon></button>
   </ion-fab>
 
 </ion-content>
