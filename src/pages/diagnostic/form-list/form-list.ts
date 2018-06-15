@@ -53,7 +53,7 @@ export class FormListPage implements OnInit {
                   });
                   toast.present();
                   loader.dismiss();
-                  this.navCtrl.setRoot(`ResultPage`);
+                  this.navCtrl.setRoot(`IncomePage`);
                 })
                 .catch(err => {
                   console.log(`Error: ${err}`);
