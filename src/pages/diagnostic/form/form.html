@@ -1,16 +1,10 @@
 <ion-header>
-    <ion-toolbar color="primary">
-        <ion-buttons left>
-            <button (click)="onGoBack()" ion-button icon-only>
-                <ion-icon name="arrow-back"></ion-icon>
-            </button>
-        </ion-buttons>
+    <ion-navbar #navbar color="primary">
         <ion-title>{{category.name}}</ion-title>
-    </ion-toolbar>
+    </ion-navbar>
 </ion-header>
 
 <ion-content>
-
     <form [formGroup]="form" class="form" *ngIf="category.name === 'Receitas'" (ngSubmit)="onSubmit(form.value, form.controls.formArray.controls.length)">
         <div formArrayName="formArray">
             <ion-list [formGroupName]="i" *ngFor="let income of form.controls.formArray.controls; let i = index">

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController, Navbar } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { debugOutputAstAsTypeScript } from '@angular/compiler';
 import { Storage } from '@ionic/storage';
@@ -14,6 +14,7 @@ import { Value } from '../../../assets/data/value.interface';
 })
 export class FormPage implements OnInit {
 
+  @ViewChild('navbar') navBar: Navbar;
   form: FormGroup;
   category: Category;
   values: Value[];
@@ -27,6 +28,9 @@ export class FormPage implements OnInit {
     this.category = this.navParams.data;
     this.onLoadValues();
     this.initForm();
+    this.navBar.backButtonClick = () => {
+      this.backButtonClick();
+    };
   }
 
   initForm() {
@@ -182,7 +186,7 @@ export class FormPage implements OnInit {
     this.storage.set(`length ${name}`, length);
   }
 
-  onGoBack() {
+  backButtonClick() {
     let alert = this.alertCtrl.create({
       title: 'Tem certeza?',
       subTitle: 'Caso volte agora, todo seu progresso no formulário será perdido.',
@@ -195,7 +199,7 @@ export class FormPage implements OnInit {
         text: 'Não, quero ficar.',
         handler: () => {
           const alert = this.alertCtrl.create({
-            message: 'Para sair sem perder o seu progresso, clique no botão localizado no canto inferior direito da sua tela.',
+            subTitle: 'Para sair sem perder o seu progresso, clique no botão "Concluir"',
             buttons: ['OK']
           });
           alert.present();
