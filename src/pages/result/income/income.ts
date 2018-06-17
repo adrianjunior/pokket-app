@@ -16,7 +16,6 @@ export class IncomePage {
   chartEl: any;
 
   formListPage = `FormListPage`;
-  graficos: string = 'pie';
 
   data: any[] = [];
 
@@ -45,7 +44,7 @@ export class IncomePage {
   }
 
   createChart() {
-    Chart.defaults.global.legend.position = 'bottom';
+    Chart.defaults.global.legend.position = 'top';
     this.chartEl = new Chart(this.chart.nativeElement, {
       type: 'pie',
         data: {
