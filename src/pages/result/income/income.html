@@ -16,23 +16,7 @@
 
 <ion-content padding>
 
-  <ion-item no-lines>
-    <ion-label>Tipo de Gráfico</ion-label>
-    <ion-select [(ngModel)]="graficos">
-      <ion-option value="pie">Pizza</ion-option>
-      <ion-option value="bar">Barra</ion-option>
-      <ion-option value="radar">Radar</ion-option>
-    </ion-select>
-  </ion-item>
-
-  <div padding-top>
-    <div style="display: block;">
-      <canvas baseChart [data]='doughnutChartData' [labels]='doughnutChartLabels' [chartType]='doughnutChartType'></canvas>
-    </div>
-    <div style="display: block;">
-      <canvas baseChart [datasets]='BarChartDataSets' [labels]='BarChartLabels' [chartType]='BarChartType' [options]='BarObjectOptions'></canvas>
-    </div>
-  </div>
+  <canvas #chart></canvas>
 
   <ion-fab right bottom>
     <button ion-fab [navPush]="formListPage">
