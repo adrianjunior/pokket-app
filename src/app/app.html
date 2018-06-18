@@ -19,15 +19,15 @@
                 <ion-icon name="cart" item-start></ion-icon>
                 Desembolsos Não-Obrigatórios
             </button>
-            <button menuClose ion-item (click)="openPage(assetPage)">
+            <button [disabled]="1 == 1" menuClose ion-item (click)="openPage(assetPage)">
                 <ion-icon name="trending-up" item-start></ion-icon>
                 Ativos
             </button>
-            <button menuClose ion-item (click)="openPage(debtPage)">
+            <button [disabled]="1 == 1" menuClose ion-item (click)="openPage(debtPage)">
                 <ion-icon name="card" item-start></ion-icon>
                 Dívidas
             </button>
-            <button menuClose ion-item (click)="openPage(helpPage)">
+            <button [disabled]="1 == 1" menuClose ion-item (click)="openPage(helpPage)">
                 <ion-icon name="help" item-start></ion-icon>
                 Ajuda
             </button>

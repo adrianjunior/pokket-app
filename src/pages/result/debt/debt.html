@@ -16,10 +16,12 @@
 
 <ion-content padding>
 
+  <p *ngIf="haveData == false">Você não possui Dívidas. Parabéns. :D</p>
+
   <canvas #chart></canvas>
 
   <ion-fab right bottom>
-    <button ion-fab [navPush]="formListPage">
+    <button ion-fab [navPush]="formPage" [navParams]="category">
       <ion-icon name="create"></ion-icon>
     </button>
   </ion-fab>

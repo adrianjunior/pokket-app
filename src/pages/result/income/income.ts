@@ -5,6 +5,8 @@ import { ThrowStmt } from '@angular/compiler';
 import { Chart } from 'chart.js';
 
 import colors from '../../../assets/data/colors';
+import { Category } from '../../../assets/data/category.interface';
+import categories from '../../../assets/data/categories';
 
 @IonicPage()
 @Component({
@@ -15,9 +17,11 @@ export class IncomePage {
   @ViewChild('chart') chart;
   chartEl: any;
 
-  formListPage = `FormListPage`;
+  formPage = `FormPage`;
 
   data: any[] = [];
+  haveData: boolean;
+  category: Category;
 
   constructor(public navCtrl: NavController, private storage: Storage) {
   }
@@ -27,19 +31,25 @@ export class IncomePage {
   chartType:string = 'pie';
 
   ionViewWillEnter() {
-    this.storage.get('Receitas')
+    this.category = categories[0];
+    this.storage.get(this.category.name)
       .then( value => {
         this.data = value;
 
         this.chartData = [];
         this.chartLabels = [];
-        this.data.forEach((data, index) => {
-          this.chartData = [...this.chartData, this.data[index].value]
-          this.chartLabels = [...this.chartLabels, this.data[index].name]
-        });
+        if(this.data != null) {
+          this.data.forEach((data, index) => {
+            this.chartData = [...this.chartData, this.data[index].value]
+            this.chartLabels = [...this.chartLabels, this.data[index].name]
+          });
+          this.createChart();
+          this.haveData = true;
+        } else {
+          this.haveData = false;
+        }
         console.log(this.chartData);
         console.log(this.chartLabels);
-        this.createChart();
       })
   }
 

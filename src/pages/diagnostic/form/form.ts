@@ -26,6 +26,7 @@ export class FormPage implements OnInit {
 
   ngOnInit() {
     this.category = this.navParams.data;
+    console.log(this.category);
     this.onLoadValues();
     this.initForm();
     this.navBar.backButtonClick = () => {

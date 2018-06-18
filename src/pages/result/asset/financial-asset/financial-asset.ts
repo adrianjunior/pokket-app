@@ -5,6 +5,8 @@ import { ThrowStmt } from '@angular/compiler';
 import { Chart } from 'chart.js';
 
 import colors from '../../../../assets/data/colors';
+import { Category } from '../../../../assets/data/category.interface';
+import categories from '../../../../assets/data/categories';
 
 @IonicPage()
 @Component({
@@ -16,9 +18,11 @@ export class FinancialAssetPage {
   @ViewChild('chart') chart;
   chartEl: any;
 
-  formListPage = `FormListPage`;
+  formPage = `FormPage`;
 
   data: any[] = [];
+  haveData: boolean;
+  category: Category;
 
   constructor(public navCtrl: NavController, private storage: Storage) {
   }
@@ -28,7 +32,8 @@ export class FinancialAssetPage {
   chartType:string = 'pie';
 
   ionViewWillEnter() {
-    this.storage.get('Ativos Financeiros')
+    this.category = categories[5];
+    this.storage.get(this.category.name)
       .then( value => {
         this.data = value;
 
