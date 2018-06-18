@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { Category } from '../../../assets/data/category.interface';
 import categories from '../../../assets/data/categories';
+import { Diagnostic } from '../../../assets/data/diagnostic.interface';
 
 @IonicPage()
 @Component({
@@ -14,9 +15,12 @@ export class FormListPage implements OnInit {
 
   formPage = `FormPage`;
   incomePage = `IncomePage`;
-  diagnostic: boolean;
+
+  diagnostic: Diagnostic;
   categories: Category[];
   numberList: number[] = [];
+  diagnosticNumber: number;
+  diagnostics: Diagnostic[];
 
   categoryList: string[] = ['Receitas', 'Desembolso Fixo Obrigatório', 'Desembolso Fixo Não-Obrigatório', 
   'Desembolso Variável Obrigatório', 'Desembolso Variável Não-Obrigatório', 'Ativos Financeiros', 
@@ -29,11 +33,12 @@ export class FormListPage implements OnInit {
 
   ionViewWillEnter() {
     this.numberList = this.getNumbers();
-    this.getDiagnostic();
   }
 
   ngOnInit() {
     this.categories = categories;
+    this.diagnosticNumber = this.navParams.get('number');
+    this.diagnostics = this.navParams.get('diagnostics');
   }
 
   onGoBack() {
@@ -41,11 +46,17 @@ export class FormListPage implements OnInit {
   }
 
   onGenerateDiagnostic() {
+    const date = new Date();
+    this.diagnostic = {
+      id: this.diagnosticNumber,
+      date: `${date.getDate}/${date.getMonth}/${date.getFullYear}`,
+      time: `${date.getHours}:${date.getMinutes}` 
+    }
     let loader = this.loadingCtrl.create({
       content: `Gerando seu Diagnóstico...`
     });
     loader.present();
-    this.storage.set('Diagnostic', true)
+    this.storage.set(`Diagnostics`, [...this.diagnostics, this.diagnostic])
                 .then(value => {
                   let toast = this.toastCtrl.create({
                     message: `Diagnóstico gerado com sucesso!`,
@@ -53,7 +64,7 @@ export class FormListPage implements OnInit {
                   });
                   toast.present();
                   loader.dismiss();
-                  this.navCtrl.setRoot(`IncomePage`);
+                  this.navCtrl.setRoot(`IncomePage`, {number: this.diagnosticNumber});
                 })
                 .catch(err => {
                   console.log(`Error: ${err}`);
@@ -69,25 +80,20 @@ export class FormListPage implements OnInit {
 
   getNumbers() {
     this.categoryList.forEach((item, index) => {
-      this.storage.get(`length ${item}`)
+      this.storage.get(`length ${item} ${this.diagnosticNumber}`)
                   .then(value => {
                     this.numberList[index] = value;
-                    console.log(`LEITURA: Valor: ${value} / Key: ${item}`)
+                    console.log(`LEITURA: Valor: ${value} / Key: ${item} ${this.diagnosticNumber}`)
                   })
     });
     console.log(this.numberList)
     return this.numberList;
   }
 
-  getDiagnostic() {
-    this.storage.get('Diagnostic')
-      .then(value => {
-        if (value) {
-          this.diagnostic = true;
-        } else {
-          this.diagnostic = false;
-        }
-      })
+  goToForm(category: Category){
+    this.navCtrl.push(this.formPage, {
+      category: category, number: this.diagnosticNumber
+    });
   }
 
 }

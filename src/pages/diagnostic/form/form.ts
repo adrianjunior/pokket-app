@@ -17,6 +17,7 @@ export class FormPage implements OnInit {
   @ViewChild('navbar') navBar: Navbar;
   form: FormGroup;
   category: Category;
+  diagnosticNumber: number;
   values: Value[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -25,7 +26,8 @@ export class FormPage implements OnInit {
     public toastCtrl: ToastController) { }
 
   ngOnInit() {
-    this.category = this.navParams.data;
+    this.category = this.navParams.get('category');
+    this.diagnosticNumber = this.navParams.get('number');
     console.log(this.category);
     this.onLoadValues();
     this.initForm();
@@ -133,9 +135,9 @@ export class FormPage implements OnInit {
       content: `Salvando sua lista de ${this.category.name}`
     });
     loader.present();
-    this.storage.set(this.category.name, val.formArray)
+    this.storage.set(`${this.category.name} ${this.diagnosticNumber}`, val.formArray)
                 .then(() => {
-                  this.setNumber(this.category.name, length);
+                  this.setNumber(`${this.category.name} ${this.diagnosticNumber}`, length);
                 }) 
                 .then(value => {
                   console.log(`Value: ${value}`);
@@ -161,7 +163,7 @@ export class FormPage implements OnInit {
   }
 
   onLoadValues() {
-    this.storage.get(this.category.name)
+    this.storage.get(`${this.category.name} ${this.diagnosticNumber}`)
                 .then(value => {
                   if(value != null) {
                     this.values = value;

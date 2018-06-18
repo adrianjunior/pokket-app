@@ -10,7 +10,7 @@ import { Storage } from '@ionic/storage';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = `FormListPage`;
+  rootPage: any = `HomePage`;
 
   formListPage = `FormListPage`;
   incomePage = `IncomePage`;
@@ -19,6 +19,7 @@ export class MyApp {
   requiredSpentPage = `RequiredSpentPage`;
   optionalSpentPage = `OptionalSpentPage`;
   helpPage = `HelpPage`;
+  homePage = `HomePage`;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage: Storage) {
     storage.get('Diagnostic')
@@ -26,7 +27,7 @@ export class MyApp {
         if (value) {
           this.nav.setRoot(this.incomePage);
         } else {
-          this.nav.setRoot(this.formListPage);
+          this.nav.setRoot(this.homePage);
         }
       })
     platform.ready().then(() => {
