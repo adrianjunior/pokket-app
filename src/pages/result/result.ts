@@ -4,16 +4,16 @@ import { Storage } from '@ionic/storage';
 import { ThrowStmt } from '@angular/compiler';
 import { Chart } from 'chart.js';
 
-import colors from '../../../assets/data/colors';
-import { Category } from '../../../assets/data/category.interface';
-import categories from '../../../assets/data/categories';
+import colors from '../../assets/data/colors';
+import { Category } from '../../assets/data/category.interface';
+import categories from '../../assets/data/categories';
 
 @IonicPage()
 @Component({
-  selector: 'page-income',
-  templateUrl: 'income.html',
+  selector: 'page-result',
+  templateUrl: 'result.html',
 })
-export class IncomePage implements OnInit {
+export class ResultPage {
   @ViewChild('chart') chart;
   chartEl: any;
 
@@ -23,6 +23,7 @@ export class IncomePage implements OnInit {
   haveData: boolean;
   category: Category;
   diagnosticNumber: number;
+  categoryNumber: number;
 
   section: string;
 
@@ -37,39 +38,21 @@ export class IncomePage implements OnInit {
   ngOnInit() {
     this.section = 'receitas';
     this.diagnosticNumber = this.navParams.get('number');
+    this.categoryNumber = 0;
   }
 
   ionViewWillEnter() {
-    this.category = categories[0];
-    this.storage.get(`${this.category.name} ${this.diagnosticNumber}`)
-      .then(value => {
-        this.data = value;
-
-        this.chartData = [];
-        this.chartLabels = [];
-        if (this.data != null) {
-          this.data.forEach((data, index) => {
-            this.chartData = [...this.chartData, this.data[index].value]
-            this.chartLabels = [...this.chartLabels, this.data[index].name]
-          });
-          this.createChart();
-          this.haveData = true;
-        } else {
-          this.haveData = false;
-        }
-        console.log(this.chartData);
-        console.log(this.chartLabels);
-      })
+    this.loadData(this.categoryNumber);
   }
 
-  createChart() {
+  createChart(categoryName: string) {
     Chart.defaults.global.legend.position = 'top';
     this.chartEl = new Chart(this.chart.nativeElement, {
       type: this.chartType,
       data: {
         labels: this.chartLabels,
         datasets: [{
-          label: 'Suas Receitas',
+          label: categoryName,
           data: this.chartData,
           duration: 1000,
           easing: 'easeInQuart',
@@ -88,18 +71,45 @@ export class IncomePage implements OnInit {
 
   onSelect() {
     switch (this.section) {
+      case 'receitas':
+        this.categoryNumber = 0;
+        break;
       case 'dfo':
-        this.navCtrl.setRoot(`HomePage`, { number: this.diagnosticNumber, goto: `RequiredFixedSpentPage` });
+        this.categoryNumber = 1;
         break;
       case 'dfno':
-        this.navCtrl.setRoot(`HomePage`, { number: this.diagnosticNumber, goto: `OptionaFixedSpentPage` });
+        this.categoryNumber = 2;
         break;
       case 'dvo':
-        this.navCtrl.setRoot(`HomePage`, { number: this.diagnosticNumber, goto: `RequiredVariableSpentPage` });
+        this.categoryNumber = 3;
         break;
       case 'dvno':
-        this.navCtrl.setRoot(`HomePage`, { number: this.diagnosticNumber, goto: `OptionaVariableSpentPage` });
+        this.categoryNumber = 4;
         break;
     }
+    this.loadData(this.categoryNumber);
+  }
+
+  loadData(categoryNumber: number) {
+    this.category = categories[categoryNumber];
+    this.storage.get(`${this.category.name} ${this.diagnosticNumber}`)
+      .then(value => {
+        this.data = value;
+
+        this.chartData = [];
+        this.chartLabels = [];
+        if (this.data != null) {
+          this.data.forEach((data, index) => {
+            this.chartData = [...this.chartData, this.data[index].value]
+            this.chartLabels = [...this.chartLabels, this.data[index].name]
+          });
+          this.createChart(this.category.name);
+          this.haveData = true;
+        } else {
+          this.haveData = false;
+        }
+        console.log(this.chartData);
+        console.log(this.chartLabels);
+      })
   }
 }

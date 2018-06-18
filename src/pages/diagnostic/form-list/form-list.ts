@@ -63,7 +63,7 @@ export class FormListPage implements OnInit {
                   });
                   toast.present();
                   loader.dismiss();
-                  this.navCtrl.setRoot(`HomePage`, {number: this.diagnosticNumber, goto: `IncomePage`});
+                  this.navCtrl.setRoot(`HomePage`, {number: this.diagnosticNumber, goto: `ResultPage`});
                 })
                 .catch(err => {
                   console.log(`Error: ${err}`);

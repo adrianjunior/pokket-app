@@ -67,7 +67,7 @@ export class HomePage implements OnInit{
   }
 
   goToDiagnostic(diagnostic: number) {
-    this.navCtrl.push(`IncomePage`, {
+    this.navCtrl.push(`ResultPage`, {
       number: diagnostic
     });
   }
