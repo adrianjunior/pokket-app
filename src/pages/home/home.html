@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title *ngIf="diagnostics.length == 0">Página Inicial</ion-title>
+    <ion-title *ngIf="diagnostics.length == 0">Pokket</ion-title>
     <ion-title *ngIf="diagnostics.length > 0">Meus Diagnósticos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div *ngIf="diagnostics.length == 0">
-    <img src="homePageImage">
+    <img src="{{homePageImage}}">
   </div>
 
   <div padding *ngIf="diagnostics.length > 0">

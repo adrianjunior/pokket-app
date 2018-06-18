@@ -15,6 +15,7 @@ export class HomePage implements OnInit{
 
   formListPage = `FormListPage`;
   homePageImage = images.homePage;
+  iconImage = images.logoIcon;
 
   diagnostics: Diagnostic[] = [];
 

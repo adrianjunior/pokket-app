@@ -90,9 +90,14 @@ export class FormListPage implements OnInit {
   }
 
   goToForm(category: Category){
-      this.navCtrl.push(this.formPage, {
-        category: category, number: this.diagnosticNumber
-      });
+    let loader = this.loadingCtrl.create({
+      content: `Carregando...`,
+      dismissOnPageChange: true
+    });
+    loader.present();
+    this.navCtrl.push(this.formPage, {
+      category: category, number: this.diagnosticNumber
+    });
   }
 
 }
