@@ -1,20 +1,25 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons left>
-      <button menuToggle ion-button icon-only>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-    <ion-title>Receitas</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Diagnóstico {{diagnosticNumber}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only>
         <ion-icon name="help"></ion-icon>
       </button>
     </ion-buttons>
-  </ion-toolbar>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-item>
+    <ion-label>Seção</ion-label>
+    <ion-select [(ngModel)]="section" cancelText="Cancelar" okText="Ok" (ionChange)="onSelect()">
+      <ion-option value="receitas">Receitas</ion-option>
+      <ion-option value="dfo">Desembolso Fixo Obrigatório</ion-option>
+      <ion-option value="dfno">Desembolso Fixo Não-Obrigatório</ion-option>
+      <ion-option value="dvo">Desembolso Variável Obrigatório</ion-option>
+      <ion-option value="dvno">Desembolso Variável Não-Obrigatório</ion-option>
+    </ion-select>
+  </ion-item>
 
   <p *ngIf="haveData == false">Você não possui Receitas. Que pena. :(</p>
 

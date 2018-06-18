@@ -22,14 +22,6 @@ export class MyApp {
   homePage = `HomePage`;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, storage: Storage) {
-    storage.get('Diagnostic')
-      .then(value => {
-        if (value) {
-          this.nav.setRoot(this.incomePage);
-        } else {
-          this.nav.setRoot(this.homePage);
-        }
-      })
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

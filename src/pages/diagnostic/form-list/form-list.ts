@@ -49,8 +49,7 @@ export class FormListPage implements OnInit {
     const date = new Date();
     this.diagnostic = {
       id: this.diagnosticNumber,
-      date: `${date.getDate}/${date.getMonth}/${date.getFullYear}`,
-      time: `${date.getHours}:${date.getMinutes}` 
+      date: `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
     }
     let loader = this.loadingCtrl.create({
       content: `Gerando seu Diagnóstico...`
@@ -64,7 +63,7 @@ export class FormListPage implements OnInit {
                   });
                   toast.present();
                   loader.dismiss();
-                  this.navCtrl.setRoot(`IncomePage`, {number: this.diagnosticNumber});
+                  this.navCtrl.setRoot(`HomePage`, {number: this.diagnosticNumber, goto: `IncomePage`});
                 })
                 .catch(err => {
                   console.log(`Error: ${err}`);
@@ -91,9 +90,9 @@ export class FormListPage implements OnInit {
   }
 
   goToForm(category: Category){
-    this.navCtrl.push(this.formPage, {
-      category: category, number: this.diagnosticNumber
-    });
+      this.navCtrl.push(this.formPage, {
+        category: category, number: this.diagnosticNumber
+      });
   }
 
 }

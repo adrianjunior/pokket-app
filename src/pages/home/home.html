@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title *ngIf="diagnostics == 0">Página Inicial</ion-title>
-    <ion-title *ngIf="diagnostics > 0">Meus Diagnósticos</ion-title>
+    <ion-title *ngIf="diagnostics.length == 0">Página Inicial</ion-title>
+    <ion-title *ngIf="diagnostics.length > 0">Meus Diagnósticos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div *ngIf="diagnostics == 0">
+  <div *ngIf="diagnostics.length == 0">
     <img src="../assets/imgs/home.png">
 
     <ion-fab right bottom>
@@ -16,12 +16,12 @@
     </ion-fab>
   </div>
 
-  <div padding *ngIf="diagnostics > 0">
+  <div padding *ngIf="diagnostics.length > 0">
     <ion-list>
-      <ion-card ion-item *ngFor="let diagnostic of diagnostics" (click)="goToDiagnostic()">
-        <ion-card-header></ion-card-header>
-        <ion-card-content></ion-card-content>
-      </ion-card>
+      <button ion-item *ngFor="let diagnostic of diagnostics; let i = index" (click)="goToDiagnostic(diagnostic.id)">
+        <h1 ion-text>Diagnóstico {{i+1}}</h1>
+        <p ion-text>Data do Diagnóstico: {{diagnostic.date}}</p>
+      </button>
     </ion-list>
   </div>
 </ion-content>

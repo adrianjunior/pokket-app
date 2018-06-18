@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, LoadingController, ToastController, Content } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Diagnostic } from '../../assets/data/diagnostic.interface';
@@ -8,7 +8,7 @@ import { Diagnostic } from '../../assets/data/diagnostic.interface';
   selector: 'page-home',
   templateUrl: 'home.html',
 })
-export class HomePage {
+export class HomePage implements OnInit{
   @ViewChild(Content) content: Content;
 
   formListPage = `FormListPage`;
@@ -17,7 +17,16 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
   private storage: Storage, public loadingCtrl: LoadingController,
-  public toastCtrl: ToastController) {}
+  public toastCtrl: ToastController, public navParams: NavParams) {}
+
+  ngOnInit() {
+    let number = this.navParams.get('number');
+    let goto = this.navParams.get('goto');
+    console.log(`NUMBER: ${number}`)
+    if(goto != null) {
+      this.navCtrl.push(goto, {number: number})
+    }
+  }
 
   ionViewWillEnter() {
     this.onCheckDiagnostic();
@@ -35,7 +44,9 @@ export class HomePage {
                   } else {
                     this.diagnostics = [];
                   }
+                  console.log('VALUE: ');
                   console.log(value); 
+                  console.log('DIAGNOSTIC: ');
                   console.log(this.diagnostics);
                 })
                 .catch(err => {
@@ -55,8 +66,10 @@ export class HomePage {
     });
   }
 
-  goToDiagnostic() {
-    
+  goToDiagnostic(diagnostic: number) {
+    this.navCtrl.push(`IncomePage`, {
+      number: diagnostic
+    });
   }
 
 }
