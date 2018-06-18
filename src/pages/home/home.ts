@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams, ModalController, LoadingController
 import { Storage } from '@ionic/storage';
 import { Diagnostic } from '../../assets/data/diagnostic.interface';
 
+import images from '../../assets/data/image-paths';
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -12,6 +14,7 @@ export class HomePage implements OnInit{
   @ViewChild(Content) content: Content;
 
   formListPage = `FormListPage`;
+  homePageImage = images.homePage;
 
   diagnostics: Diagnostic[] = [];
 
