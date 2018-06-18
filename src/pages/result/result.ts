@@ -39,10 +39,11 @@ export class ResultPage {
     this.section = 'receitas';
     this.diagnosticNumber = this.navParams.get('number');
     this.categoryNumber = 0;
+    this.category = categories[0];
   }
 
   ionViewWillEnter() {
-    this.loadData(this.categoryNumber);
+    this.loadData(this.categoryNumber, this.category.name);
   }
 
   createChart(categoryName: string) {
@@ -73,26 +74,31 @@ export class ResultPage {
     switch (this.section) {
       case 'receitas':
         this.categoryNumber = 0;
+        this.category = categories[0];
         break;
       case 'dfo':
         this.categoryNumber = 1;
+        this.category = categories[1];
         break;
       case 'dfno':
         this.categoryNumber = 2;
+        this.category = categories[2];
         break;
       case 'dvo':
         this.categoryNumber = 3;
+        this.category = categories[3];
         break;
       case 'dvno':
         this.categoryNumber = 4;
+        this.category = categories[4];
         break;
     }
-    this.loadData(this.categoryNumber);
+    this.loadData(this.categoryNumber, this.category.name);
+    console.log(this.category);
   }
 
-  loadData(categoryNumber: number) {
-    this.category = categories[categoryNumber];
-    this.storage.get(`${this.category.name} ${this.diagnosticNumber}`)
+  loadData(categoryNumber: number, categoryName: string) {
+    this.storage.get(`${categoryName} ${this.diagnosticNumber}`)
       .then(value => {
         this.data = value;
 
@@ -103,7 +109,7 @@ export class ResultPage {
             this.chartData = [...this.chartData, this.data[index].value]
             this.chartLabels = [...this.chartLabels, this.data[index].name]
           });
-          this.createChart(this.category.name);
+          this.createChart(categoryName);
           this.haveData = true;
         } else {
           this.haveData = false;
@@ -111,5 +117,12 @@ export class ResultPage {
         console.log(this.chartData);
         console.log(this.chartLabels);
       })
+  }
+
+  goToForm() {
+    this.navCtrl.push(`FormPage`, {
+      category: this.category,
+      number: this.diagnosticNumber
+    })
   }
 }

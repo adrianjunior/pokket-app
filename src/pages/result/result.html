@@ -26,7 +26,7 @@
   <canvas #chart></canvas>
 
   <ion-fab right bottom>
-    <button ion-fab [navPush]="formPage" [navParams]="category">
+    <button ion-fab (click)="goToForm()">
       <ion-icon name="create"></ion-icon>
     </button>
   </ion-fab>

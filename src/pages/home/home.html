@@ -8,12 +8,6 @@
 <ion-content>
   <div *ngIf="diagnostics.length == 0">
     <img src="../assets/imgs/home.png">
-
-    <ion-fab right bottom>
-      <button ion-fab (click)="createDiagnostic()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-fab>
   </div>
 
   <div padding *ngIf="diagnostics.length > 0">
@@ -24,4 +18,10 @@
       </button>
     </ion-list>
   </div>
+
+  <ion-fab right bottom>
+    <button ion-fab (click)="createDiagnostic()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>
