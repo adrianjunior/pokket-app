@@ -16,13 +16,7 @@
 
 <ion-content padding>
 
-  <div style="display: block;">
-    <canvas baseChart [data]='doughnutChartData' [labels]='doughnutChartLabels' [chartType]='doughnutChartType'></canvas>
-  </div>
-
-  <div style="display: block;">
-    <canvas baseChart [datasets]='BarChartDataSets' [labels]='BarChartLabels' [chartType]='BarChartType' [options]='BarObjectOptions'></canvas>
-  </div>
+  <canvas #chart></canvas>
 
   <ion-fab right bottom>
     <button ion-fab [navPush]="formListPage">

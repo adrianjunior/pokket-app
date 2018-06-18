@@ -23,7 +23,7 @@ export class OptionalFixedSpentPage {
 
   chartData:number[] = [];
   chartLabels:string[] = [];
-  chartType:string = 'doughnut';
+  chartType:string = 'pie';
 
   ionViewWillEnter() {
     this.storage.get('Desembolso Fixo Não-Obrigatório')
@@ -45,7 +45,7 @@ export class OptionalFixedSpentPage {
   createChart() {
     Chart.defaults.global.legend.position = 'top';
     this.chartEl = new Chart(this.chart.nativeElement, {
-      type: 'pie',
+      type: this.chartType,
         data: {
           labels: this.chartLabels,
           datasets: [{

@@ -25,7 +25,7 @@ export class OptionalVariableSpentPage {
 
   chartData:number[] = [];
   chartLabels:string[] = [];
-  chartType:string = 'doughnut';
+  chartType:string = 'pie';
 
   ionViewWillEnter() {
     this.storage.get('Desembolso Variável Não-Obrigatório')
@@ -47,7 +47,7 @@ export class OptionalVariableSpentPage {
   createChart() {
     Chart.defaults.global.legend.position = 'top';
     this.chartEl = new Chart(this.chart.nativeElement, {
-      type: 'pie',
+      type: this.chartType,
         data: {
           labels: this.chartLabels,
           datasets: [{

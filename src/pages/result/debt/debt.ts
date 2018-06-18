@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { ThrowStmt } from '@angular/compiler';
+import { Chart } from 'chart.js';
+
+import colors from '../../../assets/data/colors';
 
 @IonicPage()
 @Component({
@@ -8,68 +12,58 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'debt.html',
 })
 export class DebtPage {
+  @ViewChild('chart') chart;
+  chartEl: any;
 
   formListPage = `FormListPage`;
+
+  data: any[] = [];
 
   constructor(public navCtrl: NavController, private storage: Storage) {
   }
 
-  public doughnutChartLabels:string[] = ['Dados 1','Dados 2', 'Dados 3'];
-  public doughnutChartData:number[] = [1500,3000,1235];
-  public doughnutChartType:string = 'doughnut';
+  chartData:number[] = [];
+  chartLabels:string[] = [];
+  chartType:string = 'pie';
 
-  public BarChartLabels: string[] = ["Apressados", "Com Calma", "Tranquilos"];
-  public BarChartType: string = 'bar';
-  public BarChartDataSets: Object = [
-    {
-      label: 'Meus: ',
-      data: [12, 50, 20],
-      borderWidth: 1
-    },
-    {
-      label: 'Abreu: ',
-      data: [70, 30, 10],
-      borderWidth: 1
-    }
-  ];
+  ionViewWillEnter() {
+    this.storage.get('Dívidas')
+      .then( value => {
+        this.data = value;
 
-  public BarObjectOptions: Object = {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
+        this.chartData = [];
+        this.chartLabels = [];
+        this.data.forEach((data, index) => {
+          this.chartData = [...this.chartData, this.data[index].value]
+          this.chartLabels = [...this.chartLabels, this.data[index].name]
+        });
+        console.log(this.chartData);
+        console.log(this.chartLabels);
+        this.createChart();
+      })
+  }
+
+  createChart() {
+    Chart.defaults.global.legend.position = 'top';
+    this.chartEl = new Chart(this.chart.nativeElement, {
+      type: this.chartType,
+        data: {
+          labels: this.chartLabels,
+          datasets: [{
+              label                 : 'Suas Receitas',
+              data                  : this.chartData,
+              duration              : 1000,
+              easing                : 'easeInQuart',
+              backgroundColor       : colors
+          }]
+        },
+        options : {
+          maintainAspectRatio: false,
+          responsive: true,
+          animation: {
+              duration : 3000
+          }
         }
-      }]
-    }
-  };
-
-  public barChartColors: Array<any> = [
-    {
-      backgroundColor: '#1d1de2',
-      borderColor: '#1d1de2',
-      pointBackgroundColor: '#1d1de2',
-      pointBorderColor: '#1d1de2',
-      pointHoverBackgroundColor: '#1d1de2',
-      pointHoverBorderColor: '#1d1de2',
-      labels: '#1d1de2'
-    },
-    {
-      backgroundColor: '#1d1de2',
-      borderColor: '#1d1de2',
-      pointBackgroundColor: '#1d1de2',
-      pointBorderColor: '#1d1de2',
-      pointHoverBackgroundColor: '#1d1de2',
-      pointHoverBorderColor: '#1d1de2',
-      labels: '#1d1de2'
-    },
-    {
-      backgroundColor: '#3F51B5',
-      borderColor: '#3F51B5',
-      pointBackgroundColor: '#3F51B5',
-      pointBorderColor: '#3F51B5',
-      pointHoverBackgroundColor: '#3F51B5',
-      pointHoverBorderColor: '#3F51B5',
-      labels: '#3F51B5'
-    }
-  ];
+    });
+  }
 }

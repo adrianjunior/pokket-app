@@ -24,7 +24,7 @@ export class IncomePage {
 
   chartData:number[] = [];
   chartLabels:string[] = [];
-  chartType:string = 'doughnut';
+  chartType:string = 'pie';
 
   ionViewWillEnter() {
     this.storage.get('Receitas')
@@ -46,7 +46,7 @@ export class IncomePage {
   createChart() {
     Chart.defaults.global.legend.position = 'top';
     this.chartEl = new Chart(this.chart.nativeElement, {
-      type: 'pie',
+      type: this.chartType,
         data: {
           labels: this.chartLabels,
           datasets: [{
