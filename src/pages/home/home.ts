@@ -14,6 +14,7 @@ export class HomePage implements OnInit{
   @ViewChild(Content) content: Content;
 
   formListPage = `FormListPage`;
+  projectionPage = `ProjectionPage`;
   homePageImage = images.homePage;
   iconImage = images.logoIcon;
 
@@ -68,6 +69,11 @@ export class HomePage implements OnInit{
     this.navCtrl.push(this.formListPage, {
       diagnostics: this.diagnostics, number: this.diagnostics.length+1
     });
+  }
+
+  createProjection() {
+
+    
   }
 
   goToDiagnostic(diagnostic: number) {
