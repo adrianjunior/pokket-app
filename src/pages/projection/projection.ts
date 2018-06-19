@@ -1,25 +1,21 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ProjectionPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Component, OnInit } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { Diagnostic } from '../../assets/data/diagnostic.interface';
+import { Projection } from '../../assets/data/projection.interface';
+import { NewProjectionPage } from './new-projection/new-projection';
 
 @IonicPage()
 @Component({
   selector: 'page-projection',
   templateUrl: 'projection.html',
 })
-export class ProjectionPage {
+export class ProjectionPage implements OnInit {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    public modalCtrl: ModalController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProjectionPage');
+  ngOnInit() {
+    
   }
-
 }

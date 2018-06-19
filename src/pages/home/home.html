@@ -19,13 +19,19 @@
     </ion-list>
   </div>
 
-  <ion-fab right bottom *ngIf="diagnostics.length > 0">
-    <button ion-fab>
+  <ion-fab right bottom *ngIf="diagnostics.length > 0" #fab>
+    <button ion-fab (click)="openFab()">
       <ion-icon name="add"></ion-icon>
     </button>
     <ion-fab-list side="top">
-      <button ion-fab color="accent" (click)="createDiagnostic()"><ion-icon name="clipboard"></ion-icon></button>
-      <button ion-fab color="accent" (click)="createProjection()"><ion-icon name="trending-up"></ion-icon></button>
+      <button ion-fab color="accent" (click)="createDiagnostic(fab)"
+      tooltip="Criar um novo Diagnóstico" positionH="left" [active]="showTooltips" arrow="true">
+        <ion-icon name="clipboard"></ion-icon>
+      </button>
+      <button ion-fab color="accent" (click)="createProjection(fab)"
+        tooltip="Criar uma nova Projeção" positionH="left" [active]="showTooltips" arrow="true">
+        <ion-icon name="trending-up"></ion-icon>
+      </button>
     </ion-fab-list>
   </ion-fab>
 

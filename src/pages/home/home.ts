@@ -1,9 +1,11 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, LoadingController, ToastController, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, LoadingController, ToastController, Content, AlertController, FabContainer } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Diagnostic } from '../../assets/data/diagnostic.interface';
 
 import images from '../../assets/data/image-paths';
+import { Projection } from '../../assets/data/projection.interface';
+import { NewProjectionPage } from '../projection/new-projection/new-projection';
 
 @IonicPage()
 @Component({
@@ -15,14 +17,20 @@ export class HomePage implements OnInit{
 
   formListPage = `FormListPage`;
   projectionPage = `ProjectionPage`;
+  newProjectionPage = `NewProjectionPage`;
   homePageImage = images.homePage;
   iconImage = images.logoIcon;
 
+  showTooltips: boolean = false;
+  chosenDiagnostics: string[] = [];
+
   diagnostics: Diagnostic[] = [];
+  projections: Projection[] = [];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
   private storage: Storage, public loadingCtrl: LoadingController,
-  public toastCtrl: ToastController, public navParams: NavParams) {}
+  public toastCtrl: ToastController, public navParams: NavParams,
+  public alertCtrl: AlertController) {}
 
   ngOnInit() {
     let number = this.navParams.get('number');
@@ -65,18 +73,41 @@ export class HomePage implements OnInit{
                 });
   }
 
-  createDiagnostic() {
+  createDiagnostic(fab: FabContainer) {
+    if(this.showTooltips == true){
+      this.showTooltips = false;
+    }
     this.navCtrl.push(this.formListPage, {
       diagnostics: this.diagnostics, number: this.diagnostics.length+1
     });
+    fab.close();
   }
 
-  createProjection() {
+  createProjection(fab: FabContainer) {
+    fab.close();
+    if(this.showTooltips == true){
+      this.showTooltips = false;
+    }
+    let profileModal = this.modalCtrl.create(this.newProjectionPage, { 
+      diagnostics: this.diagnostics, number: this.projections.length+1,
+      projections: this.projections });
+    profileModal.present();
+  }
 
-    
+  openFab() {
+    if(this.showTooltips == false){
+      setTimeout(() => {
+        this.showTooltips = true;
+      }, 300); 
+    }else {
+      this.showTooltips = false;
+    }
   }
 
   goToDiagnostic(diagnostic: number) {
+    if(this.showTooltips == true){
+      this.showTooltips = false;
+    }
     this.navCtrl.push(`ResultPage`, {
       number: diagnostic
     });
