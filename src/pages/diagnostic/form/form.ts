@@ -259,6 +259,12 @@ export class FormPage implements OnInit {
   }
 
   setBalance(formArray, balanceArray: { name: string, value: number }[]) {
+    let initialValue: number = 0;
+    if(this.values != undefined) {
+      for(let value of this.values) {
+        initialValue = initialValue + +value.value;
+      }
+    }
     let totalValue: number = 0;
     for(let form of formArray) {
       totalValue = totalValue + +form.value;
@@ -275,19 +281,19 @@ export class FormPage implements OnInit {
         break;
       }
       case 'Desembolso Fixo Obrigatório': {
-        balanceArray[1].value = balanceArray[1].value + totalValue;;
+        balanceArray[1].value = balanceArray[1].value + totalValue - initialValue;
         break;
       }
       case 'Desembolso Fixo Não-Obrigatório': {
-        balanceArray[1].value = balanceArray[1].value + totalValue;
+        balanceArray[1].value = balanceArray[1].value + totalValue - initialValue;
         break;
       }
       case 'Desembolso Variável Obrigatório': {
-        balanceArray[1].value = balanceArray[1].value + totalValue;
+        balanceArray[1].value = balanceArray[1].value + totalValue - initialValue;
         break;
       }
       case 'Desembolso Variável Não-Obrigatório': {
-        balanceArray[1].value = balanceArray[1].value + totalValue;
+        balanceArray[1].value = balanceArray[1].value + totalValue - initialValue;
         break;
       }
     }

@@ -40,61 +40,112 @@ export class ResultPage {
   chartType: string = 'pie';
 
   ngOnInit() {
-    this.section = 'receitas';
+    this.section = 'geral';
     this.spentType = 'todos';
     this.isSpent = false;
-    this.isEditable = true;
+    this.isEditable = false;
     this.diagnosticNumber = this.navParams.get('number');
     this.categoryNumber = 0;
     this.category = categories[0];
+    this.chartType = 'bar';
+    this.loadData(null, 'Total Balance Values');
   }
 
   ionViewWillEnter() {
-    this.loadData(this.categoryNumber, this.category.name);
+    if(this.section != 'geral'){
+      this.loadData(this.categoryNumber, this.category.name);
+    }
   }
 
   createChart(categoryName: string) {
-    Chart.defaults.global.legend.position = 'top';
-    this.chartEl = new Chart(this.chart.nativeElement, {
-      type: this.chartType,
-      data: {
-        labels: this.chartLabels,
-        datasets: [{
-          label: categoryName,
-          data: this.chartData,
-          duration: 500,
-          easing: 'easeInQuart',
-          backgroundColor: colors
-        }]
-      },
-      options: {
-        maintainAspectRatio: false,
-        responsive: true,
-        animation: {
-          duration: 1000
+    if (this.chartType === 'pie') {
+      Chart.defaults.global.legend.position = 'top';
+      this.chartEl = new Chart(this.chart.nativeElement, {
+        type: this.chartType,
+        data: {
+          labels: this.chartLabels,
+          datasets: [{
+            label: categoryName,
+            data: this.chartData,
+            duration: 500,
+            easing: 'easeInQuart',
+            backgroundColor: colors
+          }]
         },
-        legend: {
-          labels: {
+        options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          animation: {
+            duration: 1000
+          },
+          legend: {
+            labels: {
               fontFamily: 'Roboto',
-          }
-        },
-        tooltips: {
-          callbacks: {
-            label: function(tooltipItem, data) {
-              let dataset = data.datasets[tooltipItem.datasetIndex];
-              let meta = dataset._meta[Object.keys(dataset._meta)[0]];
-              let total = meta.total;
-              let currentValue = dataset.data[tooltipItem.index];
-              let percentage = parseFloat((currentValue/total*100).toFixed(1));
-              return currentValue + ' (' + percentage + '%)';
-            },
-            title: function(tooltipItem, data) {
-              return data.labels[tooltipItem[0].index];
             }
-          }
+          },
+          tooltips: {
+            callbacks: {
+              label: function (tooltipItem, data) {
+                let dataset = data.datasets[tooltipItem.datasetIndex];
+                let meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                let total = meta.total;
+                let currentValue = dataset.data[tooltipItem.index];
+                let percentage = parseFloat((currentValue / total * 100).toFixed(1));
+                return currentValue + ' (' + percentage + '%)';
+              },
+              title: function (tooltipItem, data) {
+                return data.labels[tooltipItem[0].index];
+              }
+            }
+          },
+        }
+      });
+    } else if (this.chartType === 'bar') {
+      let cd1:number[] = [this.chartData[0]];
+      let cd2:number[] = [this.chartData[1]];
+      let cl1:string = this.chartLabels[0];
+      let cl2:string = this.chartLabels[1];
+      console.log(`${cd1}, ${cd2}, ${cl1}, ${cl2}`)
+      Chart.defaults.global.legend.position = 'top';
+      this.chartEl = new Chart(this.chart.nativeElement, {
+        type: this.chartType,
+        data: {
+          labels: ['Diagnóstico Geral'],
+          datasets: [{
+            label: cl1,
+            data: cd1,
+            duration: 500,
+            easing: 'easeInQuart',
+            backgroundColor: colors[0]
+          },{
+            label: cl2,
+            data: cd2,
+            duration: 500,
+            easing: 'easeInQuart',
+            backgroundColor: colors[1]
+          }]
         },
-      }
-    });
+        options: {
+          maintainAspectRatio: false,
+          responsive: true,
+          animation: {
+            duration: 1000
+          },
+          legend: {
+            labels: {
+              fontFamily: 'Roboto',
+            }
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }  
+        }
+      });
+    }
   }
 
   onSelectSection() {
@@ -105,17 +156,20 @@ export class ResultPage {
         this.isEditable = true;
         this.isSpent = false;
         this.spentType = 'todos';
+        this.chartType = 'pie';
         this.loadData(this.categoryNumber, this.category.name);
         break;
       case 'desembolsos':
         this.isSpent = true;
-        this.loadData(null, 'Total Spent Values');
         this.isEditable = false;
+        this.chartType = 'pie';
+        this.loadData(null, 'Total Spent Values');
         break;
       case 'geral':
-        this.loadData(null, 'Total Balance Values');
         this.isEditable = false;
         this.isSpent = false;
+        this.chartType = 'bar';
+        this.loadData(null, 'Total Balance Values');
         break;
     }
     console.log(this.category);
