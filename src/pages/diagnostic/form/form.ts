@@ -19,6 +19,8 @@ export class FormPage implements OnInit {
   category: Category;
   diagnosticNumber: number;
   values: Value[];
+  totalSpentValue: { name: string, value: number }[];
+  totalBalanceValue: { name: string, value: number }[];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, public formBuilder: FormBuilder,
@@ -130,6 +132,7 @@ export class FormPage implements OnInit {
   }
 
   onSubmit(val: any, length: number) {
+    console.log('Val.FormArray:');
     console.log(val.formArray);
     let loader = this.loadingCtrl.create({
       content: `Salvando sua lista de ${this.category.name}`
@@ -139,6 +142,12 @@ export class FormPage implements OnInit {
                 .then(() => {
                   this.setNumber(`${this.category.name} ${this.diagnosticNumber}`, length);
                 }) 
+                .then(() => {
+                  this.setTotalSpent(val.formArray, this.totalSpentValue);
+                })
+                .then(() => {
+                  this.setBalance(val.formArray, this.totalBalanceValue);
+                })
                 .then(value => {
                   console.log(`Value: ${value}`);
                   console.log(value);
@@ -174,6 +183,14 @@ export class FormPage implements OnInit {
                   }
                   console.log(`Values: ${this.values}`);                
                 })
+                .then(() => {
+                  this.onLoadSpentValues();
+                  console.log(`SpentValues: ${this.totalSpentValue}`);
+                })
+                .then(() => {
+                  this.onLoadBalanceValues();
+                  console.log(`BalanceValues: ${this.totalBalanceValue}`);
+                })
                 .catch(err => {
                   console.log(`Error: ${err}`);
                   console.log(err);
@@ -185,8 +202,100 @@ export class FormPage implements OnInit {
                 });
   }
 
+  onLoadSpentValues() {
+    this.storage.get(`Total Spent Values ${this.diagnosticNumber}`)
+                .then(value => {
+                  this.totalSpentValue = value;
+                })
+  }
+
+  onLoadBalanceValues() {
+    this.storage.get(`Total Balance Values ${this.diagnosticNumber}`)
+                .then(value => {
+                  this.totalBalanceValue = value;
+                })
+  }
+
   setNumber(name: string, length:number) {
     this.storage.set(`length ${name}`, length);
+  }
+
+  setTotalSpent(formArray, spentArray: { name: string, value: number }[]) {
+    let totalValue: number = 0;
+    for(let form of formArray) {
+      totalValue = totalValue + +form.value;
+    }
+    if(spentArray == undefined) {
+      spentArray = [
+        {name: 'Fixo Obrigatório', value: 0},
+        {name: 'Fixo Não-Obrigatório', value: 0},
+        {name: 'Variável Obrigatório', value: 0},
+        {name: 'Variável Não-Obrigatório', value: 0},
+      ];
+    }
+    switch(this.category.name) {
+      case 'Desembolso Fixo Obrigatório': {
+        spentArray[0].value = totalValue;
+        break;
+      }
+      case 'Desembolso Fixo Não-Obrigatório': {
+        spentArray[1].value = totalValue;
+        break;
+      }
+      case 'Desembolso Variável Obrigatório': {
+        spentArray[2].value = totalValue;
+        break;
+      }
+      case 'Desembolso Variável Não-Obrigatório': {
+        spentArray[3].value = totalValue;
+        break;
+      }
+    }
+    this.storage.set(`Total Spent Values ${this.diagnosticNumber}`, spentArray)
+                .then(() => {
+                  console.log(`Total Spent Values ${this.diagnosticNumber}`);
+                  console.log(spentArray);
+                });  
+  }
+
+  setBalance(formArray, balanceArray: { name: string, value: number }[]) {
+    let totalValue: number = 0;
+    for(let form of formArray) {
+      totalValue = totalValue + +form.value;
+    }
+    if(balanceArray == undefined) {
+      balanceArray = [
+        {name: 'Receitas', value: 0},
+        {name: 'Desembolsos', value: 0},
+      ];
+    }
+    switch(this.category.name) {
+      case 'Receitas': {
+        balanceArray[0].value = totalValue;
+        break;
+      }
+      case 'Desembolso Fixo Obrigatório': {
+        balanceArray[1].value = balanceArray[1].value + totalValue;;
+        break;
+      }
+      case 'Desembolso Fixo Não-Obrigatório': {
+        balanceArray[1].value = balanceArray[1].value + totalValue;
+        break;
+      }
+      case 'Desembolso Variável Obrigatório': {
+        balanceArray[1].value = balanceArray[1].value + totalValue;
+        break;
+      }
+      case 'Desembolso Variável Não-Obrigatório': {
+        balanceArray[1].value = balanceArray[1].value + totalValue;
+        break;
+      }
+    }
+    this.storage.set(`Total Balance Values ${this.diagnosticNumber}`, balanceArray)
+                .then(() => {
+                  console.log(`Total Balance Values ${this.diagnosticNumber}`);
+                  console.log(balanceArray);
+                });  
   }
 
   backButtonClick() {

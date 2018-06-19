@@ -12,20 +12,30 @@
 <ion-content padding>
   <ion-item>
     <ion-label>Seção</ion-label>
-    <ion-select [(ngModel)]="section" cancelText="Cancelar" okText="Ok" (ionChange)="onSelect()">
+    <ion-select [(ngModel)]="section" cancelText="Cancelar" okText="Ok" (ionChange)="onSelectSection()" interface="popover">
+      <ion-option value="geral">Diagnóstico Geral</ion-option>
       <ion-option value="receitas">Receitas</ion-option>
-      <ion-option value="dfo">Desembolso Fixo Obrigatório</ion-option>
-      <ion-option value="dfno">Desembolso Fixo Não-Obrigatório</ion-option>
-      <ion-option value="dvo">Desembolso Variável Obrigatório</ion-option>
-      <ion-option value="dvno">Desembolso Variável Não-Obrigatório</ion-option>
+      <ion-option value="desembolsos">Desembolsos</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="isSpent == true">
+    <ion-label>Tipo de Desembolso</ion-label>
+    <ion-select [(ngModel)]="spentType" cancelText="Cancelar" okText="Ok" (ionChange)="onSelectSpentType()" interface="popover">
+      <ion-option value="todos">Geral</ion-option>
+      <ion-option value="dfo">Fixo Obrigatório</ion-option>
+      <ion-option value="dfno">Fixo Não-Obrigatório</ion-option>
+      <ion-option value="dvo">Variável Obrigatório</ion-option>
+      <ion-option value="dvno">Variável Não-Obrigatório</ion-option>
     </ion-select>
   </ion-item>
 
-  <p *ngIf="haveData == false">Você não possui Receitas. Que pena. :(</p>
+  <p *ngIf="haveData == false">Você não possui Dados nesta seção.</p>
+ 
+  <div style="position: relative; height:70vh; width:91vw;">
+    <canvas #chart></canvas>
+  </div>
 
-  <canvas #chart></canvas>
-
-  <ion-fab right bottom>
+  <ion-fab right bottom *ngIf="isEditable == true">
     <button ion-fab (click)="goToForm()">
       <ion-icon name="create"></ion-icon>
     </button>
