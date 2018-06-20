@@ -11,11 +11,13 @@ import { NewProjectionPage } from './new-projection/new-projection';
 })
 export class ProjectionPage implements OnInit {
 
+  balanceNumber: number;
+
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public modalCtrl: ModalController) {
   }
 
   ngOnInit() {
-    
+    this.balanceNumber = this.navParams.get('balanceNumber');
   }
 }

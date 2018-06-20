@@ -13,13 +13,13 @@
   <div padding *ngIf="diagnostics.length > 0">
     <ion-list>
       <button ion-item *ngFor="let diagnostic of diagnostics; let i = index" (click)="goToDiagnostic(diagnostic.id)">
-        <h1 ion-text>Diagnóstico {{i+1}}</h1>
-        <p ion-text>Data do Diagnóstico: {{diagnostic.date}}</p>
+        <h1 ion-text color="accent">Diagnóstico {{i+1}}</h1>
+        <ion-note ion-text>Data do Diagnóstico: {{diagnostic.date}}</ion-note >
       </button>
     </ion-list>
   </div>
 
-  <ion-fab right bottom *ngIf="diagnostics.length > 0" #fab>
+  <ion-fab right bottom *ngIf="diagnostics.length > 1" #fab>
     <button ion-fab (click)="openFab()">
       <ion-icon name="add"></ion-icon>
     </button>
@@ -29,13 +29,13 @@
         <ion-icon name="clipboard"></ion-icon>
       </button>
       <button ion-fab color="accent" (click)="createProjection(fab)"
-        tooltip="Criar uma nova Projeção" positionH="left" [active]="showTooltips" arrow="true">
+        tooltip="Criar um novo Balanço" positionH="left" [active]="showTooltips" arrow="true">
         <ion-icon name="trending-up"></ion-icon>
       </button>
     </ion-fab-list>
   </ion-fab>
 
-  <ion-fab right bottom *ngIf="diagnostics.length == 0" #fab>
+  <ion-fab right bottom *ngIf="diagnostics.length < 2" #fab>
     <button ion-fab (click)="createDiagnostic(fab)">
       <ion-icon name="add"></ion-icon>
     </button>
