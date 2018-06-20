@@ -1,31 +1,31 @@
 export default [
     {
         name: 'Receitas',
-        description: 'Um resumo de tudo que você recebe no mês.',
+        description: 'Um resumo do dinheiro que é recebido regularmente. Exemplo: Salário.',
         image: 'assets/imgs/receitas.jpg'
         //image: 'assets/imgs/placeholder.png'
     },
     {
         name: 'Desembolso Fixo Obrigatório',
-        description: 'Contas que possuem valor fixo e devem ser pagas todo mês.',
+        description: 'Despesas indispensáveis e que possuem valor fixo, que deve ser pago durante um intervalo de tempo. Exemplo: Aluguel e Mensalidades Escolares',
         image: 'assets/imgs/dfo.jpg'
         //image: 'assets/imgs/placeholder.png'
     },
     {
         name: 'Desembolso Fixo Não-Obrigatório',
-        description: 'Contas que possuem valor fixo, mas não acontecem todo mês.',
+        description: 'Despesas que possuem um valor fixo e devem ser pago durante um intervalo de tempo, mas que não são essenciais. Exemplo: Netflix.',
         image: 'assets/imgs/dfno.jpg'
         //image: 'assets/imgs/placeholder.png'
     },
     {
         name: 'Desembolso Variável Obrigatório',
-        description: 'Contas que não possuem valor fixo, mas que tem que ser pagas todo mês',
+        description: 'Despesas que não possuem valor fixo, mas que são indispensáveis. Exemplo: Contas de Luz e Água.',
         image: 'assets/imgs/dvo.jpg'
         //image: 'assets/imgs/placeholder.png'
     },
     {
         name: 'Desembolso Variável Não-Obrigatório',
-        description: 'Contas que não possuem valor fixo e também não acontecem todo mês.',
+        description: 'Despesas que não possuem um valor fixo, e que não são essenciais. Exemplo: Compras no Shopping e Cinema.',
         image: 'assets/imgs/dvno.jpg'
         //image: 'assets/imgs/placeholder.png'
     },

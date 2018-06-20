@@ -35,8 +35,8 @@
     </ion-fab-list>
   </ion-fab>
 
-  <ion-fab right bottom *ngIf="diagnostics.length == 0">
-    <button ion-fab (click)="createDiagnostic()">
+  <ion-fab right bottom *ngIf="diagnostics.length == 0" #fab>
+    <button ion-fab (click)="createDiagnostic(fab)">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>

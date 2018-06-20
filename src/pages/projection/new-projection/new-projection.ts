@@ -16,6 +16,7 @@ export class NewProjectionPage implements OnInit{
   number: number;
 
   diagnosticCheck: boolean[] = [];
+  chosenDiagnosticsNumber: number = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public viewCtrl: ViewController, public alertCtrl: AlertController) {

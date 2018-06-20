@@ -14,20 +14,11 @@
 
   <ion-list>
     <ion-item>
-      <ion-grid>
-        <ion-row>
-          <h1 text-wrap>Passo 1: Escolha quantos diagnósticos serão usados de referência para sua projeção.</h1>
-        </ion-row>
-        <ion-row>
-          <ion-note text-wrap> Os diagnósticos usados serão os mais novos, pois eles refletem melhor seu comportamento financeiro atual.</ion-note>
-        </ion-row>
-        <ion-row>
-          <ion-range min="0" max="{{number}}" [(ngModel)]="saturation" color="secondary">
-            <ion-label range-left>0</ion-label>
-            <ion-label range-right>{{number}}</ion-label>
-          </ion-range>
-        </ion-row>
-      </ion-grid>
+      <h1 text-wrap>Passo 1: Escolha quantos diagnósticos serão usados de referência para sua projeção.</h1>
+      <ion-note text-wrap> Os diagnósticos usados serão os mais novos, pois eles refletem melhor seu comportamento financeiro atual.</ion-note>
+      <button ion-button color="primary">1 Diagnóstico</button>
+      <button [disabled]="number < 2" ion-button color="primary">2 Diagnósticos</button>
+      <button [disabled]="number < 3" ion-button color="primary">3 Diagnósticos</button>
     </ion-item>
     <ion-item>
       <h1 text-wrap>Passo 2: Escolha </h1>
