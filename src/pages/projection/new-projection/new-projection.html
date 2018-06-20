@@ -12,17 +12,55 @@
 
 <ion-content padding>
 
-  <ion-list>
+  <ion-list no-lines>
+
     <ion-item>
-      <h1 text-wrap>Passo 1: Escolha quantos diagnósticos serão usados de referência para sua projeção.</h1>
-      <ion-note text-wrap> Os diagnósticos usados serão os mais novos, pois eles refletem melhor seu comportamento financeiro atual.</ion-note>
-      <button ion-button color="primary">1 Diagnóstico</button>
-      <button [disabled]="number < 2" ion-button color="primary">2 Diagnósticos</button>
-      <button [disabled]="number < 3" ion-button color="primary">3 Diagnósticos</button>
+      <h1 text-wrap ion-text color="accent">Passo 1:</h1>
+      <ion-note text-wrap color="dark">Escolha quantos diagnósticos serão usados de referência para sua projeção. Os diagnósticos usados serão os mais novos,
+        pois eles refletem melhor seu comportamento financeiro atual.</ion-note>
     </ion-item>
+
     <ion-item>
-      <h1 text-wrap>Passo 2: Escolha </h1>
+      <ion-label>Número de Diagnósticos</ion-label>
+      <ion-select [(ngModel)]="chosenDiagnosticsNumber" interface="popover">
+        <ion-option value="1">1</ion-option>
+        <ion-option [disabled]="diagnostics.length < 2" value="2">2</ion-option>
+        <ion-option [disabled]="diagnostics.length < 3" value="3">3</ion-option>
+        <ion-option [disabled]="diagnostics.length < 4" value="4">4</ion-option>
+        <ion-option [disabled]="diagnostics.length < 5" value="5">5</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item style="padding-top: 0">
+      <h1 text-wrap ion-text color="accent">Passo 2:</h1>
+      <ion-note text-wrap color="dark">Escolha a quantidade de tempo que você quer projetar, em meses.</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Tamanho da Projeção (em meses)</ion-label>
+      <ion-select [(ngModel)]="chosenTimeGap" interface="popover">
+        <ion-option value="3">3 meses</ion-option>
+        <ion-option value="6">6 meses</ion-option>
+        <ion-option value="9">9 meses</ion-option>
+        <ion-option value="12">12 meses (1 ano)</ion-option>
+        <ion-option value="24">24 meses (2 anos)</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <h1 text-wrap ion-text color="accent">Passo 3:</h1>
+      <ion-note text-wrap color="dark">Escolha um nome para identificar sua projeção.</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Nome da Projeção</ion-label>
+      <ion-input [(ngModel)]="chosenName" type="text"></ion-input>
     </ion-item>
   </ion-list>
+
+  <button [disabled]="chosenTimeGap < 0 || chosenDiagnosticsNumber < 0 || chosenName == ''"
+    ion-button block round color="primary" (click)="onGenerateProjection()">
+      Concluir
+  </button>
 
 </ion-content>
