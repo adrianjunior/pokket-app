@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Meus Balanços</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div padding>
+    <ion-list>
+      <button ion-item *ngFor="let projection of projections; let i = index" (click)="goToProjection(projection.id, projection.name, projection.diagnostics)">
+        <h1 ion-text color="accent">{{projection.name}}</h1>
+        <ion-note ion-text>Data do Balanço: {{projection.date}}</ion-note >
+      </button>
+    </ion-list>
+  </div>
+
+</ion-content>

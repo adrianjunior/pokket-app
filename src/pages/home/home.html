@@ -2,6 +2,11 @@
   <ion-toolbar color="primary">
     <ion-title *ngIf="diagnostics.length == 0">Pokket</ion-title>
     <ion-title *ngIf="diagnostics.length > 0">Meus Diagnósticos</ion-title>
+    <ion-buttons right>
+      <button *ngIf="projections.length > 0" ion-button icon-only (click)="goToProjectionList()">
+        <ion-icon name="trending-up"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

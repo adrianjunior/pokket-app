@@ -47,6 +47,7 @@ export class NewProjectionPage implements OnInit{
     this.number = this.navParams.get('number');
     this.projections = this.navParams.get('projections');
     this.diagnostics = this.navParams.get('diagnostics');
+    this.chosenDiagnostics = [];
     this.chosenDiagnosticsNumber = -1;
     this.chosenTimeGap = -1;
     this.chosenName = '';
@@ -70,7 +71,14 @@ export class NewProjectionPage implements OnInit{
 
   onGenerateBalance() {
     this.loader.present();
-    this.chosenDiagnostics = this.diagnostics.reverse();
+    let d = this.diagnostics.reverse();
+    d = d.slice(0, this.chosenDiagnosticsNumber);
+    d = d.reverse();
+    console.log('CDN: ' + this.chosenDiagnosticsNumber)
+    for(let i = 0; i < this.chosenDiagnosticsNumber; i++){
+      this.chosenDiagnostics.push(d[i]);
+      console.log('CDs: ' + this.chosenDiagnostics)
+    }
     const date = new Date();
     this.projection = {
       id: this.number,
@@ -78,6 +86,8 @@ export class NewProjectionPage implements OnInit{
       date: `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`,
       diagnostics: this.chosenDiagnostics
     }
+    console.log('Projection: ')
+    console.log(this.projection)
     this.storage.set(`Balanços`, [...this.projections, this.projection])
       .then(() => {
         this.onLoadDiagnostic();
@@ -89,18 +99,18 @@ export class NewProjectionPage implements OnInit{
         });
         toast.present();
         this.loader.dismiss();
-        console.log(`Erro no Balanços`)
+        console.log(`Erro no Balanços ` + err)
       })
   }
 
   onLoadDiagnostic() {
     for (let i = 0; i < this.chosenDiagnosticsNumber; i++){
-      this.onLoadIncomes(i);
+      this.onLoadSpents(i);
     }
   }
 
-  onLoadIncomes(i: number) {
-    this.storage.get(`Receitas Balanço ${this.chosenDiagnostics[i].id}`)
+  /*onLoadIncomes(i: number) {
+    this.storage.get(`Receitas ${this.chosenDiagnostics[i].id}`)
     .then(value => {
       this.incomes.push(value);
       this.onLoadRequiredFixedSpent(i);
@@ -192,7 +202,7 @@ export class NewProjectionPage implements OnInit{
       this.projections.pop();
       this.storage.set(`Balanços`, this.projections);
     })
-  }
+  }*/
 
   onLoadSpents(i: number) {
     this.storage.get(`Total Spent Values ${this.chosenDiagnostics[i].id}`)
@@ -235,10 +245,10 @@ export class NewProjectionPage implements OnInit{
   }
 
   onWriteProjection() {
-    this.onWriteIncomes();
+    this.onWriteSpents();
   }
 
-  onWriteIncomes() {
+  /*onWriteIncomes() {
     this.storage.set(`Receitas Balanço ${this.number}`, this.incomes)
       .then(() => {
         this.onWriteRequiredFixedSpents();
@@ -326,7 +336,7 @@ export class NewProjectionPage implements OnInit{
         this.projections.pop();
         this.storage.set(`Balanços`, this.projections);
       })
-  }
+  }*/
 
   onWriteSpents() {
     this.storage.set(`Total Spent Values Balanço ${this.number}`, this.spents)
@@ -355,10 +365,10 @@ export class NewProjectionPage implements OnInit{
         });
         toast.present();
         this.loader.dismiss();
-        this.viewCtrl.dismiss();
         this.navCtrl.push(this.projectionPage, {
-          balanceNumber: this.number, 
+          balanceNumber: this.number, balanceName: this.chosenName, diagnostics: this.diagnostics
         });
+        this.viewCtrl.dismiss();
       })
       .catch(err => {
         let toast = this.toastCtrl.create({

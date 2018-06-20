@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>Balanço {{balanceNumber}}</ion-title>
+    <ion-title>{{balanceName}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only>
         <ion-icon name="help"></ion-icon>
@@ -14,18 +14,7 @@
     <ion-label>Seção</ion-label>
     <ion-select [(ngModel)]="section" cancelText="Cancelar" okText="Ok" (ionChange)="onSelectSection()" interface="popover">
       <ion-option value="geral">Diagnóstico Geral</ion-option>
-      <ion-option value="receitas">Receitas</ion-option>
       <ion-option value="desembolsos">Desembolsos</ion-option>
-    </ion-select>
-  </ion-item>
-  <ion-item *ngIf="isSpent == true">
-    <ion-label>Tipo de Desembolso</ion-label>
-    <ion-select [(ngModel)]="spentType" cancelText="Cancelar" okText="Ok" (ionChange)="onSelectSpentType()" interface="popover">
-      <ion-option value="todos">Geral</ion-option>
-      <ion-option value="dfo">Fixo Obrigatório</ion-option>
-      <ion-option value="dfno">Fixo Não-Obrigatório</ion-option>
-      <ion-option value="dvo">Variável Obrigatório</ion-option>
-      <ion-option value="dvno">Variável Não-Obrigatório</ion-option>
     </ion-select>
   </ion-item>
 

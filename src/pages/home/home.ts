@@ -18,10 +18,11 @@ export class HomePage implements OnInit{
   formListPage = `FormListPage`;
   projectionPage = `ProjectionPage`;
   newProjectionPage = `NewProjectionPage`;
+  projectionListPage = `ProjectionListPage`;
   homePageImage = images.homePage;
   iconImage = images.logoIcon;
 
-  showTooltips: boolean = false;
+  showTooltips: boolean = false
   chosenDiagnostics: string[] = [];
 
   diagnostics: Diagnostic[] = [];
@@ -43,6 +44,7 @@ export class HomePage implements OnInit{
 
   ionViewWillEnter() {
     this.onCheckDiagnostic();
+    this.onCheckProjections();
   }
 
   ionViewDidEnter() {
@@ -61,6 +63,30 @@ export class HomePage implements OnInit{
                   console.log(value); 
                   console.log('DIAGNOSTIC: ');
                   console.log(this.diagnostics);
+                })
+                .catch(err => {
+                  console.log(`Error: ${err}`);
+                  console.log(err);
+                  let toast = this.toastCtrl.create({
+                    message: `Não foi possível checar se o seu diagnostico foi feito. :(`,
+                    duration: 3000
+                  });
+                  toast.present();
+                });
+  }
+
+  onCheckProjections() {
+    this.storage.get('Balanços')
+                .then(value => {
+                  if(value != null) {
+                    this.projections = value;
+                  } else {
+                    this.projections = [];
+                  }
+                  console.log('VALUE: ');
+                  console.log(value); 
+                  console.log('PROJECTIONS: ');
+                  console.log(this.projections);
                 })
                 .catch(err => {
                   console.log(`Error: ${err}`);
@@ -113,4 +139,13 @@ export class HomePage implements OnInit{
     });
   }
 
+  goToProjectionList() {
+    if(this.showTooltips == true){
+      this.showTooltips = false;
+    }
+    let profileModal = this.modalCtrl.create(this.projectionListPage, {
+      projections: this.projections
+    });
+    profileModal.present();
+  }
 }

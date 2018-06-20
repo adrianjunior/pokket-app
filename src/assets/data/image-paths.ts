@@ -1,4 +1,4 @@
 export default {
-    homePage: 'assets/imgs/home.jpg',
+    homePage: 'assets/imgs/home.png',
     logoIcon: 'assets/imgs/logo.png'
 }
