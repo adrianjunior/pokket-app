@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Créditos do Aplicativo</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      <h2 ion-text color="primary">Membros da Equipe</h2>
+    </ion-list-header>
+    <ion-item *ngFor="let member of members" >
+      <ion-avatar item-start>
+        <img src="{{member.image}}">
+      </ion-avatar>
+      <h2 ion-text color="accent">{{member.name}}</h2>
+    </ion-item>
+    <ion-list-header>
+      <h2 ion-text color="primary">Orientadores</h2>
+    </ion-list-header>
+    <ion-item *ngFor="let teacher of teachers">
+      <ion-avatar item-start>
+        <img src="{{teacher.image}}">
+      </ion-avatar>
+      <h2 ion-text color="accent">{{teacher.name}}</h2>
+      <ion-note ion-text>{{teacher.role}}</ion-note>
+    </ion-item>
+    <ion-list-header>
+      <h2 ion-text color="primary">Monitores</h2>
+    </ion-list-header>
+    <ion-item *ngFor="let monitor of monitors">
+      <ion-avatar item-start>
+        <img src="{{monitor.image}}">
+      </ion-avatar>
+      <h2 ion-text color="accent">{{monitor.name}}</h2>
+      <ion-note ion-text>{{monitor.role}}</ion-note>
+    </ion-item>
+  </ion-list>
+</ion-content>

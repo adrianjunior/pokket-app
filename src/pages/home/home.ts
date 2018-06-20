@@ -14,11 +14,13 @@ import { NewProjectionPage } from '../projection/new-projection/new-projection';
 })
 export class HomePage implements OnInit{
   @ViewChild(Content) content: Content;
+  loader = this.loadingCtrl.create({});
 
   formListPage = `FormListPage`;
   projectionPage = `ProjectionPage`;
   newProjectionPage = `NewProjectionPage`;
   projectionListPage = `ProjectionListPage`;
+  creditsPage = `CreditsPage`;
   homePageImage = images.homePage;
   iconImage = images.logoIcon;
 
@@ -44,7 +46,7 @@ export class HomePage implements OnInit{
 
   ionViewWillEnter() {
     this.onCheckDiagnostic();
-    this.onCheckProjections();
+    this.onCheckProjections();  
   }
 
   ionViewDidEnter() {
@@ -147,5 +149,14 @@ export class HomePage implements OnInit{
       projections: this.projections
     });
     profileModal.present();
+  }
+
+  startLoading(content: string) {
+    this.loader.setContent(content);
+    this.loader.present();
+  }
+
+  stopLoading() {
+    this.loader.dismiss();
   }
 }

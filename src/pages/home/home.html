@@ -3,6 +3,9 @@
     <ion-title *ngIf="diagnostics.length == 0">Pokket</ion-title>
     <ion-title *ngIf="diagnostics.length > 0">Meus Diagnósticos</ion-title>
     <ion-buttons right>
+      <button ion-button icon-only [navPush]="creditsPage">
+        <ion-icon name="card"></ion-icon>
+      </button>
       <button *ngIf="projections.length > 0" ion-button icon-only (click)="goToProjectionList()">
         <ion-icon name="trending-up"></ion-icon>
       </button>
@@ -19,7 +22,7 @@
     <ion-list>
       <button ion-item *ngFor="let diagnostic of diagnostics; let i = index" (click)="goToDiagnostic(diagnostic.id)">
         <h1 ion-text color="accent">Diagnóstico {{i+1}}</h1>
-        <ion-note ion-text>Data do Diagnóstico: {{diagnostic.date}}</ion-note >
+        <ion-note ion-text>Data do Diagnóstico: {{diagnostic.date}}</ion-note>
       </button>
     </ion-list>
   </div>
@@ -29,12 +32,12 @@
       <ion-icon name="add"></ion-icon>
     </button>
     <ion-fab-list side="top">
-      <button ion-fab color="accent" (click)="createDiagnostic(fab)"
-      tooltip="Criar um novo Diagnóstico" positionH="left" [active]="showTooltips" arrow="true">
+      <button ion-fab color="accent" (click)="createDiagnostic(fab)" tooltip="Criar um novo Diagnóstico" positionH="left" [active]="showTooltips"
+        arrow="true">
         <ion-icon name="clipboard"></ion-icon>
       </button>
-      <button ion-fab color="accent" (click)="createProjection(fab)"
-        tooltip="Criar um novo Balanço" positionH="left" [active]="showTooltips" arrow="true">
+      <button ion-fab color="accent" (click)="createProjection(fab)" tooltip="Criar um novo Balanço" positionH="left" [active]="showTooltips"
+        arrow="true">
         <ion-icon name="trending-up"></ion-icon>
       </button>
     </ion-fab-list>
