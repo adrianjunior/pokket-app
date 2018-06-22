@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, ViewController, LoadingController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ThrowStmt } from '@angular/compiler';
 import { Chart } from 'chart.js';
@@ -32,7 +32,8 @@ export class ResultPage {
   isSpent: boolean;
 
   constructor(public navCtrl: NavController, private storage: Storage,
-    private navParams: NavParams, public appCtrl: App, public viewCtrl: ViewController) {
+    private navParams: NavParams, public appCtrl: App, public modalCtrl: ModalController,
+    public viewCtrl: ViewController, public loadingCtrl: LoadingController) {
   }
 
   chartData: number[] = [];
@@ -236,9 +237,20 @@ export class ResultPage {
   }
 
   goToForm() {
+    let loader = this.loadingCtrl.create({
+      content: `Carregando...`,
+      dismissOnPageChange: true
+    });
+    loader.present();
     this.navCtrl.push(`FormPage`, {
-      category: this.category,
-      number: this.diagnosticNumber
-    })
+      category: this.category, number: this.diagnosticNumber
+    });
+  }
+
+  help() {
+    let profileModal = this.modalCtrl.create(`FormTutorialPage`, {
+      type: 6
+    });
+    profileModal.present();
   }
 }

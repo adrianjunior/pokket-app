@@ -1,6 +1,11 @@
 <ion-header>
     <ion-navbar #navbar color="primary">
         <ion-title>{{category.name}}</ion-title>
+        <ion-buttons right>
+            <button ion-button icon-only (click)="help()">
+                <ion-icon name="help"></ion-icon>
+            </button>
+        </ion-buttons>
     </ion-navbar>
 </ion-header>
 

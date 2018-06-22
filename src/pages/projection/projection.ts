@@ -132,7 +132,7 @@ export class ProjectionPage implements OnInit {
           borderColor: colors[index],
           borderWidth: 3,
           backgroundColor: colors[index],
-          lineTension: 1,
+          lineTension: 0,
           pointRadius: 3
         })
         this.chartEl.update();
@@ -141,6 +141,6 @@ export class ProjectionPage implements OnInit {
   }
 
   goBack() {
-    this.navCtrl.setRoot(`HomePage`, {}, {animate: true, direction: 'forward'});
+    this.navCtrl.setRoot(`HomePage`, {catcher: true}, {animate: true, direction: 'forward'});
   }
 }

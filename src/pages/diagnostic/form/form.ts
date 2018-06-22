@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController, Navbar } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController, Navbar, ModalController } from 'ionic-angular';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { debugOutputAstAsTypeScript } from '@angular/compiler';
 import { Storage } from '@ionic/storage';
@@ -25,7 +25,7 @@ export class FormPage implements OnInit {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, public formBuilder: FormBuilder,
     private storage: Storage, public loadingCtrl: LoadingController,
-    public toastCtrl: ToastController) { }
+    public toastCtrl: ToastController, public modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.category = this.navParams.get('category');
@@ -82,6 +82,7 @@ export class FormPage implements OnInit {
           value: [value.value, Validators.required]
         });
       }
+      /*
       case 'Ativos Financeiros': {
         return this.formBuilder.group({
           product: [value.product, Validators.required],
@@ -113,6 +114,7 @@ export class FormPage implements OnInit {
           remainingValue: [value.remainingValue, Validators.required]
         });
       }
+      */
     }
   }
 
@@ -327,4 +329,40 @@ export class FormPage implements OnInit {
     alert.present();
   }
 
+  help(){
+    let profileModal;
+    switch (this.category.name) {
+      case 'Receitas': {
+        profileModal = this.modalCtrl.create(`FormTutorialPage`, {
+          type: 0
+        });
+        break;
+      }
+      case 'Desembolso Fixo Obrigatório': {
+        profileModal = this.modalCtrl.create(`FormTutorialPage`, {
+          type: 1
+        });
+        break;
+      }
+      case 'Desembolso Fixo Não-Obrigatório': {
+        profileModal = this.modalCtrl.create(`FormTutorialPage`, {
+          type: 2
+        });
+        break;
+      }
+      case 'Desembolso Variável Obrigatório': {
+        profileModal = this.modalCtrl.create(`FormTutorialPage`, {
+          type: 3
+        });
+        break;
+      }
+      case 'Desembolso Variável Não-Obrigatório': {
+        profileModal = this.modalCtrl.create(`FormTutorialPage`, {
+          type: 4
+        });
+        break;
+      }
+    }
+    profileModal.present();
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ToastController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { Category } from '../../../assets/data/category.interface';
@@ -28,7 +28,8 @@ export class FormListPage implements OnInit {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public alertCtrl: AlertController, private storage: Storage,
-    public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
+    public loadingCtrl: LoadingController, public toastCtrl: ToastController,
+    public modalCtrl: ModalController) {
   }
 
   ionViewWillEnter() {
@@ -108,4 +109,10 @@ export class FormListPage implements OnInit {
     });
   }
 
+  help() {
+    let profileModal = this.modalCtrl.create(`FormTutorialPage`, {
+      type: 5
+    });
+    profileModal.present();
+  }
 }

@@ -2,7 +2,7 @@
   <ion-navbar color="primary">
     <ion-title>Diagnóstico {{diagnosticNumber}}</ion-title>
     <ion-buttons right>
-      <button ion-button icon-only>
+      <button ion-button icon-only (click)="help()">
         <ion-icon name="help"></ion-icon>
       </button>
     </ion-buttons>
@@ -30,7 +30,7 @@
   </ion-item>
 
   <p *ngIf="haveData == false">Você não possui Dados nesta seção.</p>
- 
+
   <div style="position: relative; height:70vh; width:91vw;">
     <canvas #chart></canvas>
   </div>
