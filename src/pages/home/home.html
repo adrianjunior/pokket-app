@@ -19,7 +19,7 @@
   </div>
 
   <div padding *ngIf="diagnostics.length > 0">
-    <ion-list>
+    <ion-list no-lines>
       <button ion-item *ngFor="let diagnostic of diagnostics; let i = index" (click)="goToDiagnostic(diagnostic.id)">
         <h1 ion-text color="accent">Diagnóstico {{i+1}}</h1>
         <ion-note ion-text>Data do Diagnóstico: {{diagnostic.date}}</ion-note>

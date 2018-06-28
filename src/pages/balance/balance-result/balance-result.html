@@ -18,9 +18,21 @@
     </ion-select>
   </ion-item>
 
-  <p *ngIf="haveData == false">Você não possui Dados nesta seção.</p>
- 
   <div style="position: relative; height:70vh; width:91vw;">
     <canvas #chart></canvas>
   </div>
+
+  <!--<div ion-item *ngIf="section == 'geral'">
+    <h1 ion-text text-center color="accent">Superávits e Déficits</h1>
+    <ion-list no-lines>
+      <ion-item *ngFor="let balance of balanceIndex; let i = index">
+        <h2 ion-text>{{dates[i]}}: <span style="display:inline-block; width: 1vw;"></span>
+          <ion-icon *ngIf="balanceData[1].data[i] > balanceData[0].data[i]" name="arrow-dropup" color="secondary"></ion-icon>
+          <span *ngIf="balanceData[1].data[i] > balanceData[0].data[i]"ion-text color="secondary">R${{data[1]-data[0]}}</span>
+          <ion-icon *ngIf="balanceData[0].data[i] > balanceData[1].data[i]" name="arrow-dropdown" color="danger"></ion-icon>
+          <span *ngIf="balanceData[0].data[i] > balanceData[1].data[i]" ion-text color="danger">R${{data[0]-data[1]}}</span>
+        </h2>
+      </ion-item>
+    </ion-list>
+  </div>-->
 </ion-content>

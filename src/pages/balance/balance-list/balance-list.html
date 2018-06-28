@@ -12,7 +12,7 @@
 <ion-content>
 
   <div padding>
-    <ion-list>
+    <ion-list no-lines>
       <button ion-item *ngFor="let balance of balances; let i = index" (click)="goToBalance(balance.id, balance.name, balance.diagnostics)">
         <h1 ion-text color="accent">{{balance.name}}</h1>
         <ion-note ion-text>Data do Balanço: {{balance.date}}</ion-note >

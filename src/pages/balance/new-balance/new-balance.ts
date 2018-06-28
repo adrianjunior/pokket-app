@@ -73,11 +73,12 @@ export class NewBalancePage implements OnInit{
     this.loader.present();
     let d = this.diagnostics.reverse();
     d = d.slice(0, this.chosenDiagnosticsNumber);
+    console.log("DIAGNOSTICS: " + d);
     d = d.reverse();
     console.log('CDN: ' + this.chosenDiagnosticsNumber)
     for(let i = 0; i < this.chosenDiagnosticsNumber; i++){
       this.chosenDiagnostics.push(d[i]);
-      console.log('CDs: ' + this.chosenDiagnostics)
+      console.log('CDs: ' + this.chosenDiagnostics);
     }
     const date = new Date();
     this.balance = {

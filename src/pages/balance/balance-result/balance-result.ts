@@ -25,9 +25,14 @@ export class BalanceResultPage implements OnInit {
   section: string;
   haveData: boolean;
 
-  chartData = [];
-  chartLabels = [];
+  balanceData = [];
+  balanceLabels = [];
+  spentData = [];
+  spentLabels = [];
   chartType: string = 'line';
+
+  balanceIndex: number[] = [];
+  spentIndex: number[] = [];
 
   constructor(public navCtrl: NavController, private storage: Storage,
     private navParams: NavParams, public appCtrl: App, public viewCtrl: ViewController) {
@@ -40,8 +45,6 @@ export class BalanceResultPage implements OnInit {
     this.diagnostics.forEach(diagnostic => {
       this.dates.push(diagnostic.date);
     });
-    this.chartData = [];
-    this.chartLabels = [];
     this.section = 'geral';
     this.loadData(null, `Total Balance Values`);
   }
@@ -58,22 +61,25 @@ export class BalanceResultPage implements OnInit {
   }
 
   loadData(categoryNumber: number, categoryName: string) {
-    console.log('CHAVE:')
-    console.log(`${categoryName} Balanço ${this.balanceNumber}`);
-    this.storage.get(`${categoryName} Balanço ${this.balanceNumber}`)
+    if(categoryName == 'Total Balance Values') {
+    
+      this.storage.get(`Total Balance Values Balanço ${this.balanceNumber}`)
       .then(value => {
         this.data = value;
         console.log('DATA: ');
-        console.log(value);
-        for(let i = 0; i < 6; i++) {
-          this.chartLabels[i] = [];
-          this.chartData[i]= [];
-        }
+        console.log(this.data);
         if (this.data != null) {
           this.data.forEach((data, index) => {
             data.forEach((element, jindex) => {
-              this.chartLabels[jindex][index] = element.name;
-              this.chartData[jindex][index] = element.value;
+              this.balanceLabels[jindex] = [];
+              this.balanceData[jindex] = [];
+            }); 
+          });
+          this.data.forEach((data, index) => {
+            data.forEach((element, jindex) => {
+              this.balanceIndex[jindex] = 0;
+              this.balanceLabels[jindex][index] = element.name;
+              this.balanceData[jindex][index] = element.value;
             }); 
           });
           this.haveData = true;
@@ -82,9 +88,40 @@ export class BalanceResultPage implements OnInit {
           this.haveData = false;
           this.createChart(categoryName);
         }
-        console.log(this.chartData);
-        console.log(this.chartLabels);
+      });
+
+      console.log(`Balance Labels:`);
+      console.log(this.balanceData);
+
+    } else if(categoryName == 'Total Spent Values') {
+    
+      this.storage.get(`Total Spent Values Balanço ${this.balanceNumber}`)
+      .then(value => {
+        this.data = value;
+        if (this.data != null) {
+          this.data.forEach((data, index) => {
+            data.forEach((element, jindex) => {
+              this.spentLabels[jindex] = [];
+              this.spentData[jindex] = [];
+            }); 
+          });
+          this.data.forEach((data, index) => {
+            data.forEach((element, jindex) => {
+              this.spentIndex[jindex] = 0;
+              this.spentLabels[jindex][index] = element.name;
+              this.spentData[jindex][index] = element.value;
+            }); 
+          });
+          this.haveData = true;
+          this.createChart(categoryName);
+        } else {
+          this.haveData = false;
+          this.createChart(categoryName);
+        }
       })
+
+    }
+    
   }
 
   createChart(categoryName: string) {
@@ -115,24 +152,49 @@ export class BalanceResultPage implements OnInit {
         }
       }
     });
-    this.chartLabels.forEach((labelDataset, index) => {
-      if(labelDataset.length != 0) {
-        console.log(labelDataset)
-        this.chartEl.data.datasets.push({
-          label: labelDataset[0],
-          data: this.chartData[index],
-          duration: 500,
-          easing: 'easeInQuart',
-          fill: false,
-          borderColor: colors[index],
-          borderWidth: 3,
-          backgroundColor: colors[index],
-          lineTension: 0,
-          pointRadius: 3
-        })
-        this.chartEl.update();
-      }
-    })
+    if(categoryName == 'Total Balance Values') {
+      
+      this.balanceLabels.forEach((labelDataset, index) => {
+        if(labelDataset.length != 0) {
+          //console.log(labelDataset)
+          this.chartEl.data.datasets.push({
+            label: labelDataset[0],
+            data: this.balanceData[index],
+            duration: 500,
+            easing: 'easeInQuart',
+            fill: false,
+            borderColor: colors[index],
+            borderWidth: 3,
+            backgroundColor: colors[index],
+            lineTension: 0,
+            pointRadius: 3
+          })
+          this.chartEl.update();
+        }
+      })
+
+    } else if (categoryName == 'Total Spent Values') {
+
+      this.spentLabels.forEach((labelDataset, index) => {
+        if(labelDataset.length != 0) {
+          //console.log(labelDataset)
+          this.chartEl.data.datasets.push({
+            label: labelDataset[0],
+            data: this.spentData[index],
+            duration: 500,
+            easing: 'easeInQuart',
+            fill: false,
+            borderColor: colors[index],
+            borderWidth: 3,
+            backgroundColor: colors[index],
+            lineTension: 0,
+            pointRadius: 3
+          })
+          this.chartEl.update();
+        }
+      })
+
+    }
   }
 
   goBack() {

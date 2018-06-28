@@ -8,7 +8,7 @@ import { Diagnostic } from '../../../assets/data/diagnostic.interface';
   selector: 'page-balance-list',
   templateUrl: 'balance-list.html',
 })
-export class BalanceListPage implements OnInit {
+export class BalanceListPage {
 
   balances: Balance[] = [];
 
@@ -18,8 +18,8 @@ export class BalanceListPage implements OnInit {
     public viewCtrl: ViewController) {
   }
 
-  ngOnInit() {
-    this.balances = this.navParams.get('Balanços');
+  ionViewWillLoad() {
+    this.balances = this.navParams.get('balances');
   }
 
   goToBalance(number: number, name: string, diagnostics: Diagnostic[]) {
