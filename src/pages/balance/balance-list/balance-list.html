@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="dismiss()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Meus Balanços</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div padding>
+    <ion-list>
+      <button ion-item *ngFor="let balance of balances; let i = index" (click)="goToBalance(balance.id, balance.name, balance.diagnostics)">
+        <h1 ion-text color="accent">{{balance.name}}</h1>
+        <ion-note ion-text>Data do Balanço: {{balance.date}}</ion-note >
+      </button>
+    </ion-list>
+  </div>
+
+</ion-content>

@@ -6,7 +6,7 @@
       <button ion-button icon-only [navPush]="creditsPage">
         <ion-icon name="card"></ion-icon>
       </button>
-      <button *ngIf="projections.length > 0" ion-button icon-only (click)="goToProjectionList()">
+      <button *ngIf="balances.length > 0" ion-button icon-only (click)="goToBalanceList()">
         <ion-icon name="trending-up"></ion-icon>
       </button>
     </ion-buttons>
@@ -36,7 +36,7 @@
         arrow="true">
         <ion-icon name="clipboard"></ion-icon>
       </button>
-      <button ion-fab color="accent" (click)="createProjection(fab)" tooltip="Criar um novo Balanço" positionH="left" [active]="showTooltips"
+      <button ion-fab color="accent" (click)="createBalance(fab)" tooltip="Criar um novo Balanço" positionH="left" [active]="showTooltips"
         arrow="true">
         <ion-icon name="trending-up"></ion-icon>
       </button>

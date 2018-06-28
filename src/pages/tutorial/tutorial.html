@@ -1,0 +1,10 @@
+<ion-content>
+  <ion-slides pager #slides>
+    <ion-slide *ngFor="let image of images; let i = index">
+      <img class="image" src="{{image}}">
+      <button class="btn-end" ion-button icon-only round clear color="light" (click)="end()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

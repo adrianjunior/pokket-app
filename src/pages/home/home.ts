@@ -3,8 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, LoadingController
 import { Storage } from '@ionic/storage';
 
 import images from '../../assets/data/image-paths';
-import { Projection } from '../../assets/data/projection.interface';
-import { NewProjectionPage } from '../projection/new-projection/new-projection';
+import { Balance } from '../../assets/data/balance.interface';
 import { Diagnostic } from '../../assets/data/diagnostic.interface';
 
 @IonicPage()
@@ -16,10 +15,11 @@ export class HomePage implements OnInit {
   @ViewChild(Content) content: Content;
   loader = this.loadingCtrl.create({});
 
-  formListPage = `FormListPage`;
-  projectionPage = `ProjectionPage`;
-  newProjectionPage = `NewProjectionPage`;
-  projectionListPage = `ProjectionListPage`;
+  diagnosticOptionsPage = `DiagnosticOptionsPage`;
+  diagnosticResultPage = `DiagnosticResultPage`;
+  balanceResultPage = `BalanceResultPage`;
+  newBalancePage = `NewBalancePage`;
+  balanceListPage = `BalanceListPage`;
   creditsPage = `CreditsPage`;
   homePageImage = images.homePage;
   iconImage = images.logoIcon;
@@ -29,7 +29,7 @@ export class HomePage implements OnInit {
   chosenDiagnostics: string[] = [];
 
   diagnostics: Diagnostic[] = [];
-  projections: Projection[] = [];
+  balances: Balance[] = [];
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
     private storage: Storage, public loadingCtrl: LoadingController,
@@ -51,7 +51,7 @@ export class HomePage implements OnInit {
 
   ionViewWillEnter() {
     this.onCheckDiagnostic();
-    this.onCheckProjections();
+    this.onCheckBalances();
   }
 
   ionViewDidEnter() {
@@ -82,18 +82,18 @@ export class HomePage implements OnInit {
       });
   }
 
-  onCheckProjections() {
+  onCheckBalances() {
     this.storage.get('Balanços')
       .then(value => {
         if (value != null) {
-          this.projections = value;
+          this.balances = value;
         } else {
-          this.projections = [];
+          this.balances = [];
         }
         console.log('VALUE: ');
         console.log(value);
-        console.log('PROJECTIONS: ');
-        console.log(this.projections);
+        console.log('BALANCES: ');
+        console.log(this.balances);
       })
       .catch(err => {
         console.log(`Error: ${err}`);
@@ -110,20 +110,20 @@ export class HomePage implements OnInit {
     if (this.showTooltips == true || this.catcher == false) {
       this.showTooltips = false;
     }
-    this.navCtrl.push(this.formListPage, {
+    this.navCtrl.push(this.diagnosticOptionsPage, {
       diagnostics: this.diagnostics, number: this.diagnostics.length + 1
     });
     fab.close();
   }
 
-  createProjection(fab: FabContainer) {
+  createBalance(fab: FabContainer) {
     fab.close();
     if (this.showTooltips == true || this.catcher == false) {
       this.showTooltips = false;
     }
-    let profileModal = this.modalCtrl.create(this.newProjectionPage, {
-      diagnostics: this.diagnostics, number: this.projections.length + 1,
-      projections: this.projections
+    let profileModal = this.modalCtrl.create(this.newBalancePage, {
+      diagnostics: this.diagnostics, number: this.balances.length + 1,
+      balances: this.balances
     });
     profileModal.present();
   }
@@ -144,17 +144,17 @@ export class HomePage implements OnInit {
     if (this.showTooltips == true || this.catcher == false) {
       this.showTooltips = false;
     }
-    this.navCtrl.push(`ResultPage`, {
+    this.navCtrl.push(this.diagnosticResultPage, {
       number: diagnostic
     });
   }
 
-  goToProjectionList() {
+  goToBalanceList() {
     if (this.showTooltips == true || this.catcher == false) {
       this.showTooltips = false;
     }
-    let profileModal = this.modalCtrl.create(this.projectionListPage, {
-      projections: this.projections
+    let profileModal = this.modalCtrl.create(this.balanceListPage, {
+      balances: this.balances
     });
     profileModal.present();
   }
