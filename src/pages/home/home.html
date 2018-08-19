@@ -3,9 +3,6 @@
     <ion-title *ngIf="diagnostics.length == 0">Pokket</ion-title>
     <ion-title *ngIf="diagnostics.length > 0">Meus Diagnósticos</ion-title>
     <ion-buttons right>
-      <button ion-button icon-only [navPush]="creditsPage">
-        <ion-icon name="card"></ion-icon>
-      </button>
       <button *ngIf="balances.length > 0" ion-button icon-only (click)="goToBalanceList()">
         <ion-icon name="trending-up"></ion-icon>
       </button>
